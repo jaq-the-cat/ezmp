@@ -1,0 +1,36 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+4NT_args	android/gradlew.bat	/^:4NT_args$/;"	l
+APP_BASE_NAME	android/gradlew.bat	/^set APP_BASE_NAME=%~n0$/;"	v
+APP_HOME	android/gradlew.bat	/^set APP_HOME=%DIRNAME%$/;"	v
+CLASSPATH	android/gradlew.bat	/^set CLASSPATH=%APP_HOME%\\gradle\\wrapper\\gradle-wrapper.jar$/;"	v
+CMD_LINE_ARGS	android/gradlew.bat	/^set CMD_LINE_ARGS=$/;"	v
+CMD_LINE_ARGS	android/gradlew.bat	/^set CMD_LINE_ARGS=%*$/;"	v
+CMD_LINE_ARGS	android/gradlew.bat	/^set CMD_LINE_ARGS=%\$$/;"	v
+DEFAULT_JVM_OPTS	android/gradlew.bat	/^set DEFAULT_JVM_OPTS=$/;"	v
+DIRNAME	android/gradlew.bat	/^if "%DIRNAME%" == "" set DIRNAME=.$/;"	v
+DIRNAME	android/gradlew.bat	/^set DIRNAME=%~dp0$/;"	v
+GeneratedPluginRegistrant	android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java	/^public final class GeneratedPluginRegistrant {$/;"	c
+GeneratedPluginRegistrant_h	ios/Runner/GeneratedPluginRegistrant.h	6;"	d
+JAVA_EXE	android/gradlew.bat	/^set JAVA_EXE=%JAVA_HOME%\/bin\/java.exe$/;"	v
+JAVA_EXE	android/gradlew.bat	/^set JAVA_EXE=java.exe$/;"	v
+JAVA_HOME	android/gradlew.bat	/^set JAVA_HOME=%JAVA_HOME:"=%$/;"	v
+_SKIP	android/gradlew.bat	/^set _SKIP=2$/;"	v
+die	android/gradlew	/^die ( ) {$/;"	f
+end	android/gradlew.bat	/^:end$/;"	l
+execute	android/gradlew.bat	/^:execute$/;"	l
+fail	android/gradlew.bat	/^:fail$/;"	l
+findJavaFromJavaHome	android/gradlew.bat	/^:findJavaFromJavaHome$/;"	l
+init	android/gradlew.bat	/^:init$/;"	l
+io.flutter.plugins	android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java	/^package io.flutter.plugins;$/;"	p
+mainEnd	android/gradlew.bat	/^:mainEnd$/;"	l
+omega	android/gradlew.bat	/^:omega$/;"	l
+registerWith	android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java	/^  public static void registerWith(@NonNull FlutterEngine flutterEngine) {$/;"	m	class:GeneratedPluginRegistrant
+splitJvmOpts	android/gradlew	/^function splitJvmOpts() {$/;"	f
+warn	android/gradlew	/^warn ( ) {$/;"	f
+win9xME_args	android/gradlew.bat	/^:win9xME_args$/;"	l
+win9xME_args_slurp	android/gradlew.bat	/^:win9xME_args_slurp$/;"	l
