@@ -44,34 +44,32 @@ class HomePageState extends State<HomePage> {
         List<Widget> list = [];
         for (String name in playlists.keys)
             list.add(PlaylistItem(name, (name) {
-                setState(() => playlists.remove(name));
-            }));
+            setState(() => playlists.remove(name));
+        }));
         if (newPlaylistOpen) {
             list.add(
                 Form(
-                    child: GestureDetector(
-                        child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 10),
-                            child: Row(
-                                children: <Widget>[
-                                    Expanded(
-                                        child: TextFormField(
-                                            controller: nameController,
-                                        ),
+                    child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                            children: <Widget>[
+                                Expanded(
+                                    child: TextFormField(
+                                        controller: nameController,
                                     ),
-                                    TextButton(
-                                        child: Text("Create"),
-                                        onPressed: () {
-                                            setState(() {
-                                                playlists[nameController.text] = [];
-                                                nameController.clear();
-                                                newPlaylistOpen ^= true;
-                                            });
-                                        },
-                                    )
-                                ]
-                            )
-                        ),
+                                ),
+                                TextButton(
+                                    child: Text("Create"),
+                                    onPressed: () {
+                                        setState(() {
+                                            playlists[nameController.text] = [];
+                                            nameController.clear();
+                                            newPlaylistOpen ^= true;
+                                        });
+                                    },
+                                )
+                            ]
+                        )
                     ),
                 ),
             );
@@ -111,15 +109,15 @@ class PlaylistItem extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-        return TextButton(
-            onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PlaylistPage(name))
-                );
-            },
-            child: GestureDetector(
-                onLongPress: addToPlaylist(name),
+        return GestureDetector(
+            onLongPress: addToPlaylist(name),
+            child: TextButton(
+                onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PlaylistPage(name))
+                    );
+                },
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -132,7 +130,7 @@ class PlaylistItem extends StatelessWidget {
                         Icon(Icons.keyboard_arrow_right),
                     ],
                 ),
-            )
+            ),
         );
     }
 }
