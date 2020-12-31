@@ -54,13 +54,12 @@ class HomePageState extends State<HomePage> {
             ),
             body: Center(
                 child: ListView(
-                    children: makePlaylistWidgets() + <Widget>[
-                        FloatingActionButton(
-                            child: Icon(Icons.add),
-                            onPressed: () {},
-                        )
-                    ],
+                    children: makePlaylistWidgets(),
                 ),
+            ),
+            floatingActionButton: FloatingActionButton(
+                child: Icon(Icons.add),
+                onPressed: () {},
             ),
         );
     }
