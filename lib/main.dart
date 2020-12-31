@@ -49,27 +49,29 @@ class HomePageState extends State<HomePage> {
         if (newPlaylistOpen) {
             list.add(
                 Form(
-                    child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                            children: <Widget>[
-                                Expanded(
-                                    child: TextFormField(
-                                        controller: nameController,
+                    child: GestureDetector(
+                        child: Container(
+                            margin: EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                                children: <Widget>[
+                                    Expanded(
+                                        child: TextFormField(
+                                            controller: nameController,
+                                        ),
                                     ),
-                                ),
-                                TextButton(
-                                    child: Text("Create"),
-                                    onPressed: () {
-                                        setState(() {
-                                            playlists[nameController.text] = [];
-                                            nameController.clear();
-                                            newPlaylistOpen ^= true;
-                                        });
-                                    },
-                                )
-                            ]
-                        )
+                                    TextButton(
+                                        child: Text("Create"),
+                                        onPressed: () {
+                                            setState(() {
+                                                playlists[nameController.text] = [];
+                                                nameController.clear();
+                                                newPlaylistOpen ^= true;
+                                            });
+                                        },
+                                    )
+                                ]
+                            )
+                        ),
                     ),
                 ),
             );
@@ -117,22 +119,20 @@ class PlaylistItem extends StatelessWidget {
                 );
             },
             child: GestureDetector(
-                onLongPress: () => addToPlaylist(name),
-                child: Container(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                            Text(
-                                name,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                ),
+                onLongPress: addToPlaylist(name),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                        Text(
+                            name,
+                            style: TextStyle(
+                                fontSize: 20,
                             ),
-                            Icon(Icons.keyboard_arrow_right),
-                        ],
-                    ),
+                        ),
+                        Icon(Icons.keyboard_arrow_right),
+                    ],
                 ),
-            ),
+            )
         );
     }
 }
