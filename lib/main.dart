@@ -118,7 +118,6 @@ class PlaylistItem extends StatelessWidget {
                 children: [
                     Text(
                         name,
-                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 20,
                         ),
