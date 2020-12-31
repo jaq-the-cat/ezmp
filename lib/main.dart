@@ -75,30 +75,15 @@ class PlaylistItem extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-        return Container(
-            child: Row( 
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                    Text(
-                        name,
-                        style: TextStyle(
-                            fontSize: 20,
-                        ),
-                    ),
-                    IconButton(
-                        icon: Icon(Icons.add),
-                        color: Colors.lightGreen,
-                        onPressed: () {},
-                        tooltip: "Add song",
-                    )
-                ]
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-            decoration: BoxDecoration(
-                border: Border(
-                    top: BorderSide(color: Colors.black54, width: 0.75),
+        return ElevatedButton(
+            onPressed: () {},
+            child: Text(
+                name,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 20,
                 ),
-            )
+            ),
         );
     }
 }
