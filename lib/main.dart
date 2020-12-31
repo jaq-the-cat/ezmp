@@ -3,13 +3,6 @@ import 'playlist.dart';
 
 final newPlaylistKey = GlobalKey<HomePageState>();
 
-Map<String, List<String>> playlists = {
-    "Playlist 1": ["/path/to/song/1", "/path/to/song/2"],
-    "Playlist 2": ["/path/to/song/1", "/path/to/song/2", "/path/to/song/3"],
-    "Playlist 3": ["/path/to/song/1"],
-    "Playlist 4": [],
-};
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -40,11 +33,18 @@ class HomePageState extends State<HomePage> {
     bool newPlaylistOpen = false;
     TextEditingController nameController = TextEditingController();
 
+    Map<String, List<String>> playlists = {
+        "Playlist 1": ["/path/to/song/1", "/path/to/song/2"],
+        "Playlist 2": ["/path/to/song/1", "/path/to/song/2", "/path/to/song/3"],
+        "Playlist 3": ["/path/to/song/1"],
+        "Playlist 4": [],
+    };
+
     List<Widget> makePlaylistWidgets() {
         List<Widget> list = [];
         for (String name in playlists.keys)
-            list.add(PlaylistItem(name));
-        if (!newPlaylistOpen) {
+            list.add(PlaylistItem(name, (name) => setState(() => playlists.remove(name))));
+        if (newPlaylistOpen) {
             list.add(
                 Form(
                     child: Container(
@@ -100,9 +100,10 @@ class HomePageState extends State<HomePage> {
 
 class PlaylistItem extends StatelessWidget {
 
-    PlaylistItem(this.name, {Key key}) : super(key: key);
+    PlaylistItem(this.name, this.addToPlaylist, {Key key}) : super(key: key);
 
     final String name;
+    final Function(String) addToPlaylist;
 
     @override
     Widget build(BuildContext context) {
@@ -114,7 +115,7 @@ class PlaylistItem extends StatelessWidget {
                 );
             },
             child: GestureDetector(
-                onLongPress: () => print(playlists.containsKey(name)),
+                onLongPress: addToPlaylist(name),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
