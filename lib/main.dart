@@ -52,16 +52,14 @@ class HomePageState extends State<HomePage> {
             appBar: AppBar(
                 title: Text(widget.title),
             ),
-            body: Center(
-                child: ListView(
-                    children: <Widget>[
-                        TextButton.icon(
-                            icon: Icon(Icons.add),
-                            label: Text("New Playlist"),
-                            onPressed: () {},
-                        )
-                    ] + makePlaylistWidgets(),
-                ),
+            body: ListView(
+                children: <Widget>[
+                    TextButton.icon(
+                        icon: Icon(Icons.add),
+                        label: Text("New Playlist"),
+                        onPressed: () {},
+                    )
+                ] + makePlaylistWidgets(),
             ),
         );
     }
