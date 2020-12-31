@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'playlist.dart';
 
-const List<String> playlists = [
-    "Playlist 1",
-    "Playlist 2",
-    "Playlist 3",
-    "Playlist 4",
-    "Playlist 5",
-    "Playlist 6",
-    "Playlist 7",
-    "Playlist 8",
-    "Playlist 9",
-];
+const Map<String, List<String>> playlists = {
+    "Playlist 1": ["/path/to/song/1", "/path/to/song/2"],
+    "Playlist 2": ["/path/to/song/1", "/path/to/song/2", "/path/to/song/3"],
+    "Playlist 3": ["/path/to/song/1"],
+    "Playlist 4": [],
+};
 
 void main() => runApp(MyApp());
 
@@ -42,7 +37,7 @@ class HomePageState extends State<HomePage> {
 
     List<Widget> makePlaylistWidgets() {
         List<Widget> list = [];
-        for (String name in playlists)
+        for (String name in playlists.keys)
             list.add(PlaylistItem(name));
         return list;
     }
