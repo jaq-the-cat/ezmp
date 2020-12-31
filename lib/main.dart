@@ -35,10 +35,28 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
 
+    bool newPlaylistOpen = false;
+
     List<Widget> makePlaylistWidgets() {
         List<Widget> list = [];
         for (String name in playlists.keys)
             list.add(PlaylistItem(name));
+        if (!newPlaylistOpen) {
+            list.add(
+                Form(
+                    child: Row(
+                        children: <Widget>[
+                            TextFormField(),
+                            ElevatedButton.icon(
+                                icon: Icon(Icons.check),
+                                label: Text("Create"),
+                                onPressed: null,
+                            ),
+                        ],
+                    ),
+                ),
+            );
+        }
         return list;
     }
 
