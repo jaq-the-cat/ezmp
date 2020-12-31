@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'playlist.dart';
 
 const List<String> playlists = [
     "Playlist 1",
@@ -73,7 +74,12 @@ class PlaylistItem extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return TextButton(
-            onPressed: () {},
+            onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PlaylistPage(name))
+                );
+            },
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
