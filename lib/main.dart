@@ -110,7 +110,7 @@ class PlaylistItem extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return GestureDetector(
-            onLongPress: addToPlaylist(name),
+            onLongPress: () => addToPlaylist(name),
             child: TextButton(
                 onPressed: () {
                     Navigator.push(
