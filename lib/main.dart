@@ -54,12 +54,14 @@ class HomePageState extends State<HomePage> {
             ),
             body: Center(
                 child: ListView(
-                    children: makePlaylistWidgets(),
+                    children: <Widget>[
+                        TextButton.icon(
+                            icon: Icon(Icons.add),
+                            label: Text("New Playlist"),
+                            onPressed: () {},
+                        )
+                    ] + makePlaylistWidgets(),
                 ),
-            ),
-            floatingActionButton: FloatingActionButton(
-                child: Icon(Icons.add),
-                onPressed: () {},
             ),
         );
     }
@@ -83,6 +85,12 @@ class PlaylistItem extends StatelessWidget {
                             fontSize: 20,
                         ),
                     ),
+                    IconButton(
+                        icon: Icon(Icons.add),
+                        color: Colors.lightGreen,
+                        onPressed: () {},
+                        tooltip: "Add song",
+                    )
                 ]
             ),
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
