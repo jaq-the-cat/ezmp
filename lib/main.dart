@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'playlist.dart';
 
+final newPlaylistKey = GlobalKey<HomePageState>();
+
 const Map<String, List<String>> playlists = {
     "Playlist 1": ["/path/to/song/1", "/path/to/song/2"],
     "Playlist 2": ["/path/to/song/1", "/path/to/song/2", "/path/to/song/3"],
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: Colors.deepOrange,
                 visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
-            home: HomePage(title: 'EZMP'),
+            home: HomePage(title: 'EZMP', key: newPlaylistKey),
         );
     }
 }
@@ -36,6 +38,7 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
 
     bool newPlaylistOpen = false;
+    TextEditingController nameController = TextEditingController();
 
     List<Widget> makePlaylistWidgets() {
         List<Widget> list = [];
@@ -44,15 +47,11 @@ class HomePageState extends State<HomePage> {
         if (!newPlaylistOpen) {
             list.add(
                 Form(
-                    child: Row(
-                        children: <Widget>[
-                            TextFormField(),
-                            ElevatedButton.icon(
-                                icon: Icon(Icons.check),
-                                label: Text("Create"),
-                                onPressed: null,
-                            ),
-                        ],
+                    child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        child: TextFormField(
+                            controller: nameController,
+                        )
                     ),
                 ),
             );
