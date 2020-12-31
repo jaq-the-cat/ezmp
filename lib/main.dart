@@ -117,20 +117,22 @@ class PlaylistItem extends StatelessWidget {
                 );
             },
             child: GestureDetector(
-                onLongPress: addToPlaylist(name),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                        Text(
-                            name,
-                            style: TextStyle(
-                                fontSize: 20,
+                onLongPress: () => addToPlaylist(name),
+                child: Container(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                            Text(
+                                name,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                ),
                             ),
-                        ),
-                        Icon(Icons.keyboard_arrow_right),
-                    ],
+                            Icon(Icons.keyboard_arrow_right),
+                        ],
+                    ),
                 ),
-            )
+            ),
         );
     }
 }
