@@ -43,7 +43,9 @@ class HomePageState extends State<HomePage> {
     List<Widget> makePlaylistWidgets() {
         List<Widget> list = [];
         for (String name in playlists.keys)
-            list.add(PlaylistItem(name, (name) => setState(() => playlists.remove(name))));
+            list.add(PlaylistItem(name, (name) {
+                setState(() => playlists.remove(name));
+            }));
         if (newPlaylistOpen) {
             list.add(
                 Form(
