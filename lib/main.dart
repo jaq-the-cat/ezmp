@@ -40,6 +40,31 @@ class HomePageState extends State<HomePage> {
         "Playlist 4": [],
     };
 
+    Future<void> confirmDelete(String playlist) async {
+        return showDialog<void>(
+            context: context,
+            builder: (BuildContext context) {
+                return AlertDialog(
+                    title: Text("Delete Playlist"),
+                    content: Container(
+                        padding: EdgeInsets.all(15),
+                        child: Text("Are you sure you would like to delete $playlist?"),
+                    ),
+                    actions: <Widget>[
+                        TextButton(
+                            child: Text("Yes"),
+                            onPressed: () => setState(() => playlists.remove(playlist)),
+                        ),
+                        TextButton(
+                            child: Text("No"),
+                            onPressed: () => Navigator.of(context).pop(),
+                        ),
+                    ]
+                );
+            }
+        );
+    }
+
     List<Widget> makePlaylistWidgets() {
         List<Widget> list = [];
         for (String name in playlists.keys)
@@ -102,15 +127,15 @@ class HomePageState extends State<HomePage> {
 
 class PlaylistItem extends StatelessWidget {
 
-    PlaylistItem(this.name, this.addToPlaylist, {Key key}) : super(key: key);
+    PlaylistItem(this.name, this.removeFromPlaylist, {Key key}) : super(key: key);
 
     final String name;
-    final Function(String) addToPlaylist;
+    final Function(String) removeFromPlaylist;
 
     @override
     Widget build(BuildContext context) {
         return GestureDetector(
-            onLongPress: () => addToPlaylist(name),
+            onLongPress: () => removeFromPlaylist(name),
             child: TextButton(
                 onPressed: () {
                     Navigator.push(
