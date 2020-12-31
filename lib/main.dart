@@ -53,7 +53,10 @@ class HomePageState extends State<HomePage> {
                     actions: <Widget>[
                         TextButton(
                             child: Text("Yes"),
-                            onPressed: () => setState(() => playlists.remove(playlist)),
+                            onPressed: () {
+                                setState(() => playlists.remove(playlist));
+                                Navigator.of(context).pop();
+                            },
                         ),
                         TextButton(
                             child: Text("No"),
@@ -68,7 +71,7 @@ class HomePageState extends State<HomePage> {
     List<Widget> makePlaylistWidgets() {
         List<Widget> list = [];
         for (String name in playlists.keys)
-            list.add(PlaylistItem(name, confirmDelete));
+            list.add(PlaylistItem(name, this.confirmDelete));
         if (newPlaylistOpen) {
             list.add(
                 Form(
