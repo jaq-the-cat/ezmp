@@ -58,7 +58,12 @@ class HomePageState extends State<HomePage> {
                                 ),
                                 TextButton(
                                     child: Text("Create"),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                        setState(() {
+                                            nameController.clear();
+                                            newPlaylistOpen ^= true;
+                                        });
+                                    },
                                 )
                             ]
                         )
@@ -82,7 +87,10 @@ class HomePageState extends State<HomePage> {
                 icon: Icon(Icons.add),
                 label: Text("New Playlist"),
                 onPressed: () {
-                    setState(() => newPlaylistOpen ^= true);
+                    setState(() {
+                        nameController.clear();
+                        newPlaylistOpen ^= true;
+                    });
                 },
             )
         );
