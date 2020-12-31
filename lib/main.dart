@@ -3,7 +3,7 @@ import 'playlist.dart';
 
 final newPlaylistKey = GlobalKey<HomePageState>();
 
-const Map<String, List<String>> playlists = {
+Map<String, List<String>> playlists = {
     "Playlist 1": ["/path/to/song/1", "/path/to/song/2"],
     "Playlist 2": ["/path/to/song/1", "/path/to/song/2", "/path/to/song/3"],
     "Playlist 3": ["/path/to/song/1"],
@@ -60,6 +60,7 @@ class HomePageState extends State<HomePage> {
                                     child: Text("Create"),
                                     onPressed: () {
                                         setState(() {
+                                            playlists[nameController.text] = [];
                                             nameController.clear();
                                             newPlaylistOpen ^= true;
                                         });
