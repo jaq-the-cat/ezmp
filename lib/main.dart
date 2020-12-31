@@ -75,14 +75,20 @@ class PlaylistItem extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-        return ElevatedButton(
+        return TextButton(
             onPressed: () {},
-            child: Text(
-                name,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 20,
-                ),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                    Text(
+                        name,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20,
+                        ),
+                    ),
+                    Icon(Icons.keyboard_arrow_right),
+                ],
             ),
         );
     }
