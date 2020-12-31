@@ -49,8 +49,18 @@ class HomePageState extends State<HomePage> {
                 Form(
                     child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
-                        child: TextFormField(
-                            controller: nameController,
+                        child: Row(
+                            children: <Widget>[
+                                Expanded(
+                                    child: TextFormField(
+                                        controller: nameController,
+                                    ),
+                                ),
+                                TextButton(
+                                    child: Text("Create"),
+                                    onPressed: () {},
+                                )
+                            ]
                         )
                     ),
                 ),
@@ -71,7 +81,9 @@ class HomePageState extends State<HomePage> {
             floatingActionButton: ElevatedButton.icon(
                 icon: Icon(Icons.add),
                 label: Text("New Playlist"),
-                onPressed: () {},
+                onPressed: () {
+                    setState(() => newPlaylistOpen ^= true);
+                },
             )
         );
     }
