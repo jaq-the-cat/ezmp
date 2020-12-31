@@ -53,14 +53,13 @@ class HomePageState extends State<HomePage> {
                 title: Text(widget.title),
             ),
             body: ListView(
-                children: <Widget>[
-                    TextButton.icon(
-                        icon: Icon(Icons.add),
-                        label: Text("New Playlist"),
-                        onPressed: () {},
-                    )
-                ] + makePlaylistWidgets(),
+                children: makePlaylistWidgets(),
             ),
+            floatingActionButton: ElevatedButton.icon(
+                icon: Icon(Icons.add),
+                label: Text("New Playlist"),
+                onPressed: () {},
+            )
         );
     }
 }
