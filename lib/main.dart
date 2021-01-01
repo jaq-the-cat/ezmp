@@ -66,8 +66,9 @@ class HomePageState extends State<HomePage> {
         );
     }
 
-    Future<void> renamePlaylist(String playlist) async {
-        return showDialog<void>(
+    Future<String> renamePlaylist(String playlist) async {
+        final ctrl = TextEditingController();
+        return showDialog<String>(
             context: context,
             builder: (BuildContext context) {
                 return Dialog(
@@ -78,17 +79,19 @@ class HomePageState extends State<HomePage> {
                             Form(
                                 child: Column(
                                     children: <Widget>[
-                                        TextFormField(),
+                                        TextFormField(
+                                            controller: ctrl,
+                                        ),
                                         Row(
                                             mainAxisAlignment: MainAxisAlignment.end,
                                             children: <Widget>[
                                                 TextButton(
                                                     child: Text("Cancel"),
-                                                    onPressed: () {},
+                                                    onPressed: () => Navigator.of(context).pop(""),
                                                 ),
                                                 TextButton(
                                                     child: Text("Rename"),
-                                                    onPressed: () {},
+                                                    onPressed: () => Navigator.of(context).pop(ctrl.text),
                                                 ),
                                             ]
                                         )
