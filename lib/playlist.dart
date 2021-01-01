@@ -38,11 +38,21 @@ class PlaylistState extends State<PlaylistPage> {
                     }
                 ).toList(),
             ),
-            floatingActionButton: ElevatedButton.icon(
-                icon: Icon(Icons.music_note),
-                label: Text("Add Song"),
-                onPressed: () {},
-            )
+            floatingActionButton: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                    ElevatedButton.icon(
+                        icon: Icon(Icons.music_note),
+                        label: Text("Add Song"),
+                        onPressed: () {},
+                    ),
+                    SizedBox(width: 15),
+                    FloatingActionButton(
+                        child: Icon(Icons.play_arrow),
+                        onPressed: () {},
+                    )
+                ],
+            ),
         );
     }
 }
