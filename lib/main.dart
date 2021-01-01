@@ -63,6 +63,29 @@ class HomePageState extends State<HomePage> {
         );
     }
 
+    Future<void> renamePlaylist(String playlist) async {
+        return showDialog<void>(
+            context: context,
+            builder: (BuildContext context) {
+                return Dialog(
+                    child: Center(
+                        child: Form(
+                            child: Column(
+                                children: <Widget>[
+                                    TextFormField(),
+                                    TextButton(
+                                        child: Text("Rename"),
+                                        onPressed: () {},
+                                    ),
+                                ]
+                            )
+                        )
+                    )
+                );
+            }
+        );
+    }
+
     Future<bool> confirmDelete(String playlist) async {
         return showDialog<bool>(
             context: context,
