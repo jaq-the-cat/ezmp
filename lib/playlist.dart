@@ -26,11 +26,29 @@ class PlaylistState extends State<PlaylistPage> {
                             children: <Widget>[
                                 Padding(
                                     padding: EdgeInsets.only(left: 12.5),
-                                    child: Text(songName),
+                                    child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                            Text(
+                                                songName,
+                                                style: TextStyle(
+                                                    fontSize: 17.5,
+                                                    color: Colors.black54,
+                                                )
+                                            ),
+                                            Text(
+                                                "XX:XX",
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors.black54,
+                                                )
+                                            ),
+                                        ],
+                                    ),
                                 ),
                                 IconButton(
                                     icon: Icon(Icons.play_arrow),
-                                    color: Colors.green,
+                                    color: Colors.deepOrange,
                                     onPressed: () {},
                                 )
                             ],
@@ -38,20 +56,10 @@ class PlaylistState extends State<PlaylistPage> {
                     }
                 ).toList(),
             ),
-            floatingActionButton: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                    ElevatedButton.icon(
-                        icon: Icon(Icons.music_note),
-                        label: Text("Add Song"),
-                        onPressed: () {},
-                    ),
-                    SizedBox(width: 15),
-                    FloatingActionButton(
-                        child: Icon(Icons.play_arrow),
-                        onPressed: () {},
-                    )
-                ],
+            floatingActionButton:  ElevatedButton.icon(
+                icon: Icon(Icons.music_note),
+                label: Text("Add Song"),
+                onPressed: () {},
             ),
         );
     }
