@@ -53,9 +53,9 @@ class HomePageState extends State<HomePage> {
                         ),
                         SimpleDialogOption(
                             child: Text("Delete"),
-                            onPressed: () {
-                                confirmDelete(playlist).then((e) => Navigator.of(context).pop());
-                            },
+                            onPressed: () => confirmDelete(playlist).then((selected) {
+                                if (selected) Navigator.of(context).pop();
+                            }),
                         )
                     ]
                 );
