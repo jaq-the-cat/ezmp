@@ -52,15 +52,15 @@ class HomePageState extends State<HomePage> {
                     ),
                     actions: <Widget>[
                         TextButton(
-                            child: Text("Yes"),
+                            child: Text("CANCEL"),
+                            onPressed: () => Navigator.of(context).pop(),
+                        ),
+                        TextButton(
+                            child: Text("ACCEPT"),
                             onPressed: () {
                                 setState(() => playlists.remove(playlist));
                                 Navigator.of(context).pop();
                             },
-                        ),
-                        TextButton(
-                            child: Text("No"),
-                            onPressed: () => Navigator.of(context).pop(),
                         ),
                     ]
                 );
