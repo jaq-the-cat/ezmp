@@ -40,6 +40,27 @@ class HomePageState extends State<HomePage> {
         "Playlist 4": [],
     };
 
+    Future<void> heldOnPlaylist(String playlist) async {
+        return showDialog<void>(
+            context: context,
+            builder: (BuildContext context) {
+                return SimpleDialog(
+                    title: Text("Manage $playlist"),
+                    children: <Widget>[
+                        SimpleDialogOption(
+                            child: Text("Rename"),
+                            onPressed: () {},
+                        ),
+                        SimpleDialogOption(
+                            child: Text("Delete"),
+                            onPressed: () {},
+                        )
+                    ]
+                );
+            }
+        );
+    }
+
     Future<void> confirmDelete(String playlist) async {
         return showDialog<void>(
             context: context,
