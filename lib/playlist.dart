@@ -38,37 +38,27 @@ class PlaylistState extends State<PlaylistPage> {
                     )
                 ] + widget.songs.map(
                     (songName) {
-                        return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                                Padding(
-                                    padding: EdgeInsets.only(left: 12.5),
-                                    child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                            Text(
-                                                songName,
-                                                style: TextStyle(
-                                                    fontSize: 17.5,
-                                                    color: Colors.black54,
-                                                )
-                                            ),
-                                            Text(
-                                                "XX:XX",
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.black54,
-                                                )
-                                            ),
-                                        ],
+                        return Padding(
+                            padding: EdgeInsets.only(left: 12.5),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                    Text(
+                                        songName,
+                                        style: TextStyle(
+                                            fontSize: 17.5,
+                                            color: Colors.black54,
+                                        )
                                     ),
-                                ),
-                                IconButton(
-                                    icon: Icon(Icons.play_arrow),
-                                    color: Colors.deepOrange,
-                                    onPressed: () {},
-                                )
-                            ],
+                                    Text(
+                                        "XX:XX",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.black54,
+                                        )
+                                    ),
+                                ],
+                            ),
                         );
                     }
                 ).toList(),
