@@ -49,7 +49,10 @@ class HomePageState extends State<HomePage> {
                     children: <Widget>[
                         SimpleDialogOption(
                             child: Text("Rename"),
-                            onPressed: () {},
+                            onPressed: () => renamePlaylist(playlist).then((newName) {
+                                // TODO: Rename playlist logic
+                                Navigator.of(context).pop();
+                            }),
                         ),
                         SimpleDialogOption(
                             child: Text("Delete"),
