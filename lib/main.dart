@@ -53,7 +53,9 @@ class HomePageState extends State<HomePage> {
                         ),
                         SimpleDialogOption(
                             child: Text("Delete"),
-                            onPressed: () {},
+                            onPressed: () {
+                                confirmDelete(playlist).then((e) => Navigator.of(context).pop());
+                            },
                         )
                     ]
                 );
@@ -61,8 +63,8 @@ class HomePageState extends State<HomePage> {
         );
     }
 
-    Future<void> confirmDelete(String playlist) async {
-        return showDialog<void>(
+    Future<bool> confirmDelete(String playlist) async {
+        return showDialog<bool>(
             context: context,
             builder: (BuildContext context) {
                 return AlertDialog(
@@ -74,13 +76,13 @@ class HomePageState extends State<HomePage> {
                     actions: <Widget>[
                         TextButton(
                             child: Text("CANCEL"),
-                            onPressed: () => Navigator.of(context).pop(),
+                            onPressed: () => Navigator.of(context).pop(false),
                         ),
                         TextButton(
                             child: Text("ACCEPT"),
                             onPressed: () {
                                 setState(() => playlists.remove(playlist));
-                                Navigator.of(context).pop();
+                                Navigator.of(context).pop(true);
                             },
                         ),
                     ]
@@ -92,7 +94,7 @@ class HomePageState extends State<HomePage> {
     List<Widget> makePlaylistWidgets() {
         List<Widget> list = [];
         for (String name in playlists.keys)
-            list.add(PlaylistItem(name, this.confirmDelete));
+            list.add(PlaylistItem(name, this.heldOnPlaylist));
         if (newPlaylistOpen) {
             list.add(
                 Form(
