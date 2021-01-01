@@ -50,7 +50,8 @@ class HomePageState extends State<HomePage> {
                         SimpleDialogOption(
                             child: Text("Rename"),
                             onPressed: () => renamePlaylist(playlist).then((newName) {
-                                // TODO: Rename playlist logic
+                                if (newName != "" && !playlists.containsKey(newName))
+                                    playlists[newName] = playlists.remove(playlist);
                                 Navigator.of(context).pop();
                             }),
                         ),
