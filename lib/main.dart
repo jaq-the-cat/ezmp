@@ -51,7 +51,7 @@ class HomePageState extends State<HomePage> {
                             child: Text("Rename"),
                             onPressed: () => renamePlaylist(playlist).then((newName) {
                                 if (newName != "" && !playlists.containsKey(newName))
-                                    playlists[newName] = playlists.remove(playlist);
+                                    setState(() => playlists[newName] = playlists.remove(playlist));
                                 Navigator.of(context).pop();
                             }),
                         ),
@@ -74,13 +74,14 @@ class HomePageState extends State<HomePage> {
             builder: (BuildContext context) {
                 return Dialog(
                     child: ListView(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.symmetric(horizontal: 15),
                         shrinkWrap: true,
                         children: <Widget>[
                             Form(
                                 child: Column(
                                     children: <Widget>[
                                         TextFormField(
+                                            autofocus: true,
                                             controller: ctrl,
                                         ),
                                         Row(
