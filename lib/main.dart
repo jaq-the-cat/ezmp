@@ -138,7 +138,7 @@ class HomePageState extends State<HomePage> {
     List<Widget> makePlaylistWidgets() {
         List<Widget> list = [];
         for (String name in playlists.keys)
-            list.add(PlaylistItem(name, this.heldOnPlaylist));
+            list.add(PlaylistItem(name, playlists[name], this.heldOnPlaylist));
         if (newPlaylistOpen) {
             list.add(
                 Form(
@@ -195,9 +195,10 @@ class HomePageState extends State<HomePage> {
 
 class PlaylistItem extends StatelessWidget {
 
-    PlaylistItem(this.name, this.removeFromPlaylist, {Key key}) : super(key: key);
+    PlaylistItem(this.name, this.songs, this.removeFromPlaylist, {Key key}) : super(key: key);
 
     final String name;
+    final List<String> songs;
     final Function(String) removeFromPlaylist;
 
     @override
@@ -208,7 +209,7 @@ class PlaylistItem extends StatelessWidget {
                 onPressed: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => PlaylistPage(name))
+                        MaterialPageRoute(builder: (context) => PlaylistPage(name, songs))
                     );
                 },
                 child: Row(
