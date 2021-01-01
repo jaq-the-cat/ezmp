@@ -71,18 +71,31 @@ class HomePageState extends State<HomePage> {
             context: context,
             builder: (BuildContext context) {
                 return Dialog(
-                    child: Center(
-                        child: Form(
-                            child: Column(
-                                children: <Widget>[
-                                    TextFormField(),
-                                    TextButton(
-                                        child: Text("Rename"),
-                                        onPressed: () {},
-                                    ),
-                                ]
+                    child: ListView(
+                        padding: EdgeInsets.all(10),
+                        shrinkWrap: true,
+                        children: <Widget>[
+                            Form(
+                                child: Column(
+                                    children: <Widget>[
+                                        TextFormField(),
+                                        Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: <Widget>[
+                                                TextButton(
+                                                    child: Text("Cancel"),
+                                                    onPressed: () {},
+                                                ),
+                                                TextButton(
+                                                    child: Text("Rename"),
+                                                    onPressed: () {},
+                                                ),
+                                            ]
+                                        )
+                                    ]
+                                )
                             )
-                        )
+                        ],
                     )
                 );
             }
