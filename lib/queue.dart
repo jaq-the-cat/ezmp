@@ -1,12 +1,28 @@
 import 'dart:collection';
 
-class Queue {
+class _Queue {
+    bool playing = false;
+    bool shuffle = false;
     int _current;
-    LinkedHashSet<String> _q;
+    List<String> _q;
+
+    void togglePlayPause() => this.playing ^= true;
+
+    void toggleShuffle() {
+        this.shuffle = true;
+    }
 
     void addToQueue(String song) => this._q.add(song);
 
-    void moveTo(String song) => this._current = indexOf(song, _q);
+    void moveTo(String song) => this._current = _q.indexOf(song);
+
+    void playNext(String song) {
+        _q.remove(song);
+        if (_current < _q.length-1)
+            _q.insert(_current+1, song);
+        else
+            _q.add(song);
+    }
 
     void seek() {} // go to xx:xx in song
 
@@ -23,8 +39,4 @@ class Queue {
     }
 }
 
-int indexOf(String song, LinkedHashSet<String> q) {
-    for (int i=0; i<q.length; i++)
-        if (q.elementAt(i) == song)
-            return i;
-}
+_Queue globalQueue = _Queue();

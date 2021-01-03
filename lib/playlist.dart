@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dialogs.dart';
+import 'queue.dart';
 
 @immutable
 class _AfterMenu {
@@ -37,13 +38,13 @@ class PlaylistState extends State<PlaylistPage> {
                                 ElevatedButton.icon(
                                     icon: Icon(Icons.shuffle),
                                     label: Text("Shuffle"),
-                                    onPressed: () {},
+                                    onPressed: () => globalQueue.toggleShuffle(),
                                 ),
                                 SizedBox(width: 5),
                                 ElevatedButton.icon(
                                     icon: Icon(Icons.play_arrow),
                                     label: Text("Play"),
-                                    onPressed: () {},
+                                    onPressed: () => globalQueue.togglePlayPause(),
                                 ),
                             ]
                         )
