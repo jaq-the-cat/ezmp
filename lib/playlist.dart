@@ -67,7 +67,7 @@ class PlaylistState extends State<PlaylistPage> {
                                     ],
                                 ),
                                 IconButton(
-                                    icon: Icon(Icons.edit),
+                                    icon: Icon(Icons.menu_open),
                                     iconSize: 18,
                                     onPressed: () {},
                                 )
