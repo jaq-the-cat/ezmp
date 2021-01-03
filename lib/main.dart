@@ -65,7 +65,7 @@ class HomePageState extends State<HomePage> {
                                 onPressed: () {
                                     setState(() {
                                         if (nameController.text != null && nameController.text != "") {
-                                            playlists[nameController.text] = [];
+                                            playlists[nameController.text] = Set();
                                             nameController.clear();
                                         }
                                         newPlaylistOpen ^= true;
@@ -108,7 +108,7 @@ class PlaylistItem extends StatelessWidget {
     PlaylistItem(this.name, this.songs, this.onLongPress, {Key key}) : super(key: key);
 
     final String name;
-    final List<String> songs;
+    final Set<String> songs;
     final Function onLongPress;
 
     @override

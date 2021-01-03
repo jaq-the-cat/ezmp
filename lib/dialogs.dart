@@ -129,8 +129,8 @@ Future<dynamic> showEditDialog(BuildContext context, Function onPlayNext, Functi
     );
 }
 
-Future<List<String>> showAddSongDialog(BuildContext context) {
-    return showDialog<List<String>>(
+Future<Set<String>> showAddSongDialog(BuildContext context) {
+    return showDialog<Set<String>>(
         context: context,
         builder: (BuildContext context) => _AddSongDialog(),
     );
@@ -144,7 +144,7 @@ class _AddSongDialog extends StatefulWidget {
 
 class _AddSongState extends State<_AddSongDialog> {
 
-    List<String> added = [];
+    Set<String> added = Set();
 
     Widget build(BuildContext context) {
         return  Dialog(

@@ -14,7 +14,7 @@ class PlaylistPage extends StatefulWidget {
     PlaylistPage(this.name, this.songs, {Key key}) : super(key: key);
 
     final String name;
-    final List<String> songs;
+    final Set<String> songs;
 
     @override
     PlaylistState createState() => PlaylistState();
