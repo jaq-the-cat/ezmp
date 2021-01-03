@@ -133,41 +133,50 @@ Future<String> showAddSongDialog(BuildContext context, Function onAdd) {
     return showDialog<String>(
         context: context,
         builder: (BuildContext context) =>
-            SimpleDialog(
-                title: Text("Add Song"),
-                children: getSongs().map((name) {
-                    return SimpleDialogOption(
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                                Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                        Text(
-                                            name,
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.white,
-                                            )
-                                        ),
-                                        Text(
-                                            "XX:XX",
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white38,
-                                            )
-                                        ),
-                                    ],
-                                ),
-                                IconButton(
-                                    icon: Icon(Icons.add),
-                                    iconSize: 16,
-                                    onPressed: onAdd,
-                                ),
-                            ],
+            Dialog(
+                child: Column(
+                    children: <Widget>[
+                        SizedBox(height: 15),
+                        Text(
+                            "Add Songs",
+                            style: TextStyle(
+                                fontSize: 18
+                            ),
                         ),
-                    );
-                }).toList(),
+                    ] + getSongs().map((name) {
+                        return SimpleDialogOption(
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                    Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                            Text(
+                                                name,
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.white,
+                                                )
+                                            ),
+                                            Text(
+                                                "XX:XX",
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors.white38,
+                                                )
+                                            ),
+                                        ],
+                                    ),
+                                    IconButton(
+                                        icon: Icon(Icons.add),
+                                        iconSize: 16,
+                                        onPressed: onAdd,
+                                    ),
+                                ],
+                            ),
+                        );
+                    }).toList(),
+                ),
             ),
     );
 }
