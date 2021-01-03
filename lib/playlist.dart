@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+@immutable
+class _AfterMenu {
+    _AfterMenu({this.playNext, this.remove});
+
+    final bool playNext;
+    final bool remove;
+}
+
 class PlaylistPage extends StatefulWidget {
 
     PlaylistPage(this.name, this.songs, {Key key}) : super(key: key);
@@ -67,7 +75,7 @@ class PlaylistState extends State<PlaylistPage> {
                                     ],
                                 ),
                                 IconButton(
-                                    icon: Icon(Icons.menu_open),
+                                    icon: Icon(Icons.menu),
                                     iconSize: 18,
                                     onPressed: () {},
                                 )
@@ -83,4 +91,25 @@ class PlaylistState extends State<PlaylistPage> {
             ),
         );
     }
+}
+
+Future<_AfterMenu> showEditDialog(BuildContext context) {
+    return showDialog<_AfterMenu>(
+        context: context,
+        builder: (BuildContext context) =>
+            SimpleDialog(
+                title: Text("Edit Song"),
+                children: <Widget>[
+                    SimpleDialogOption(
+                        child: Text("Play next"),
+                        onPressed: () => Navigator.of(context).pop(_AfterMenu(playNext: true)),
+                    ),
+                    SimpleDialogOption(
+                        child: Text("Remove"),
+                        onPressed: () => Navigator.of(context).pop(_AfterMenu(remove: true)),
+                    ),
+                ]
+
+            ),
+    );
 }
