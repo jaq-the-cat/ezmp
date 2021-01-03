@@ -84,8 +84,10 @@ class PlaylistState extends State<PlaylistPage> {
                                         () => Navigator.of(context).pop(_AfterMenu(playNext: true)),
                                         () => Navigator.of(context).pop(_AfterMenu(remove: true)),
                                     ).then((r) {
-                                        print(r.playNext);
-                                        print(r.remove);
+                                        if (r.playNext == true)
+                                            globalQueue.playNext(songName);
+                                        else if (r.remove == true)
+                                            globalQueue.playNext(songName);
                                     }),
                                 )
                             ]

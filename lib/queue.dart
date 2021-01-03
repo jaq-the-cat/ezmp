@@ -14,15 +14,17 @@ class _Queue {
 
     void addToQueue(String song) => this._q.add(song);
 
-    void moveTo(String song) => this._current = _q.indexOf(song);
+    void moveTo(String song) => this._current = this._q.indexOf(song);
 
     void playNext(String song) {
-        _q.remove(song);
-        if (_current < _q.length-1)
-            _q.insert(_current+1, song);
+        this._q.remove(song);
+        if (this._current < this._q.length-1)
+            this._q.insert(_current+1, song);
         else
-            _q.add(song);
+            this._q.add(song);
     }
+
+    void remove(String song) => this._q.remove(song);
 
     void seek() {} // go to xx:xx in song
 
