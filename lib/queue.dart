@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 class _Queue {
     bool playing = false;
     bool shuffle = false;
