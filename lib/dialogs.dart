@@ -129,53 +129,59 @@ Future<dynamic> showEditDialog(BuildContext context, Function onPlayNext, Functi
     );
 }
 
-Future<String> showAddSongDialog(BuildContext context, Function onAdd) {
-    return showDialog<String>(
+Future<List<String>> showAddSongDialog(BuildContext context, Function onAdd) {
+    return showDialog<List<String>>(
         context: context,
         builder: (BuildContext context) =>
             Dialog(
-                child: Column(
-                    children: <Widget>[
-                        SizedBox(height: 15),
-                        Text(
-                            "Add Songs",
-                            style: TextStyle(
-                                fontSize: 18
-                            ),
-                        ),
-                    ] + getSongs().map((name) {
-                        return SimpleDialogOption(
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                    Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                            Text(
-                                                name,
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: Colors.white,
-                                                )
-                                            ),
-                                            Text(
-                                                "XX:XX",
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.white38,
-                                                )
-                                            ),
-                                        ],
-                                    ),
-                                    IconButton(
-                                        icon: Icon(Icons.add),
-                                        iconSize: 16,
-                                        onPressed: onAdd,
-                                    ),
-                                ],
-                            ),
+                child: ListView(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.all(15),
+                    children: getSongs().map((name) {
+                        return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                                Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                        Text(
+                                            name,
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.white,
+                                            )
+                                        ),
+                                        Text(
+                                            "XX:XX",
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.white38,
+                                            )
+                                        ),
+                                    ],
+                                ),
+                                IconButton(
+                                    icon: Icon(Icons.add),
+                                    iconSize: 16,
+                                    onPressed: onAdd,
+                                ),
+                            ],
                         );
-                    }).toList(),
+                    }).toList() + [
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                                TextButton(
+                                    child: Text("CANCEL"),
+                                    onPressed: () => Navigator.of(context).pop(),
+                                ),
+                                TextButton(
+                                    child: Text("DONE"),
+                                    onPressed: () => Navigator.of(context).pop([]),
+                                ),
+                            ],
+                        ),
+                    ],
                 ),
             ),
     );
