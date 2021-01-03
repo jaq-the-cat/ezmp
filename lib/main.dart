@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'playlist.dart';
+import 'dialogs.dart';
 
 final newPlaylistKey = GlobalKey<HomePageState>();
 
@@ -41,103 +42,16 @@ class HomePageState extends State<HomePage> {
         "Playlist 4": [],
     };
 
-    Future<void> heldOnPlaylist(String playlist) async {
-        return showDialog<void>(
-            context: context,
-            builder: (BuildContext context) {
-                return SimpleDialog(
-                    title: Text("Manage $playlist"),
-                    children: <Widget>[
-                        SimpleDialogOption(
-                            child: Text("Rename"),
-                            onPressed: () => renamePlaylist(playlist).then((newName) {
-                                if (newName != "" && !playlists.containsKey(newName))
-                                    setState(() => playlists[newName] = playlists.remove(playlist));
-                                Navigator.of(context).pop();
-                            }),
-                        ),
-                        SimpleDialogOption(
-                            child: Text("Delete"),
-                            onPressed: () => confirmDelete(playlist).then((selected) {
-                                if (selected) Navigator.of(context).pop();
-                            }),
-                        )
-                    ]
-                );
-            }
-        );
-    }
-
-    Future<String> renamePlaylist(String playlist) async {
-        final ctrl = TextEditingController();
-        return showDialog<String>(
-            context: context,
-            builder: (BuildContext context) {
-                return Dialog(
-                    child: ListView(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        shrinkWrap: true,
-                        children: <Widget>[
-                            Column(
-                                children: <Widget>[
-                                    TextFormField(
-                                        autofocus: true,
-                                        controller: ctrl,
-                                    ),
-                                    Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: <Widget>[
-                                            TextButton(
-                                                child: Text("Cancel"),
-                                                onPressed: () => Navigator.of(context).pop(""),
-                                            ),
-                                            TextButton(
-                                                child: Text("Rename"),
-                                                onPressed: () => Navigator.of(context).pop(ctrl.text),
-                                            ),
-                                        ]
-                                    )
-                                ]
-                            ),
-                        ],
-                    ),
-                );
-            }
-        );
-    }
-
-    Future<bool> confirmDelete(String playlist) async {
-        return showDialog<bool>(
-            context: context,
-            builder: (BuildContext context) {
-                return AlertDialog(
-                    title: Text("Delete Playlist"),
-                    content: Container(
-                        padding: EdgeInsets.all(15),
-                        child: Text("Are you sure you would like to delete $playlist?"),
-                    ),
-                    actions: <Widget>[
-                        TextButton(
-                            child: Text("CANCEL"),
-                            onPressed: () => Navigator.of(context).pop(false),
-                        ),
-                        TextButton(
-                            child: Text("ACCEPT"),
-                            onPressed: () {
-                                setState(() => playlists.remove(playlist));
-                                Navigator.of(context).pop(true);
-                            },
-                        ),
-                    ]
-                );
-            }
-        );
-    }
-
     List<Widget> makePlaylistWidgets() {
         List<Widget> list = [];
         for (String name in playlists.keys)
-            list.add(PlaylistItem(name, playlists[name], this.heldOnPlaylist));
+            list.add(PlaylistItem(name, playlists[name], () {
+                confirmDelete(
+                    name,
+                    () => setState(() => playlists.remove(name)),
+                    context,
+                );
+        }));
         if (newPlaylistOpen) {
             list.add(
                 Container(
@@ -195,11 +109,11 @@ class HomePageState extends State<HomePage> {
 
 class PlaylistItem extends StatelessWidget {
 
-    PlaylistItem(this.name, this.songs, this.removeFromPlaylist, {Key key}) : super(key: key);
+    PlaylistItem(this.name, this.songs, this.onLongPress, {Key key}) : super(key: key);
 
     final String name;
     final List<String> songs;
-    final Function(String) removeFromPlaylist;
+    final Function onLongPress;
 
     @override
     Widget build(BuildContext context) {
@@ -210,7 +124,7 @@ class PlaylistItem extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => PlaylistPage(name, songs))
                 );
             },
-            onLongPress: () => removeFromPlaylist(name),
+            onLongPress: onLongPress,
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
