@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dialogs.dart';
 
 @immutable
 class _AfterMenu {
@@ -77,7 +78,11 @@ class PlaylistState extends State<PlaylistPage> {
                                 IconButton(
                                     icon: Icon(Icons.menu),
                                     iconSize: 18,
-                                    onPressed: () => showEditDialog(context).then((r) {
+                                    onPressed: () => showEditDialog(
+                                        context,
+                                        () => Navigator.of(context).pop(_AfterMenu(playNext: true)),
+                                        () => Navigator.of(context).pop(_AfterMenu(remove: true)),
+                                    ).then((r) {
                                         print(r.playNext);
                                         print(r.remove);
                                     }),

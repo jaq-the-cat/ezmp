@@ -86,7 +86,6 @@ Future<bool> confirmDelete(String playlist, Function onAccept, BuildContext cont
                         child: Text("ACCEPT"),
                         onPressed: () {
                             onAccept();
-                            //setState(() => playlists.remove(playlist));
                             Navigator.of(context).pop(true);
                         },
                     ),
@@ -96,8 +95,8 @@ Future<bool> confirmDelete(String playlist, Function onAccept, BuildContext cont
     );
 }
 
-Future<Widget> showEditDialog(BuildContext context, Function onPlayNext, Function onRemove) {
-    return showDialog<Widget>(
+Future<dynamic> showEditDialog(BuildContext context, Function onPlayNext, Function onRemove) {
+    return showDialog<dynamic>(
         context: context,
         builder: (BuildContext context) =>
             SimpleDialog(
@@ -122,7 +121,6 @@ Future<Widget> showEditDialog(BuildContext context, Function onPlayNext, Functio
                             ],
                         ),
                         onPressed: onRemove,
-                        //onPressed: () => Navigator.of(context).pop(_AfterMenu(remove: true)),
                     ),
                 ]
 
