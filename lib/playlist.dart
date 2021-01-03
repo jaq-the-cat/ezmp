@@ -87,7 +87,7 @@ class PlaylistState extends State<PlaylistPage> {
                                         if (r.playNext == true)
                                             globalQueue.playNext(songName);
                                         else if (r.remove == true)
-                                            globalQueue.playNext(songName);
+                                            globalQueue.remove(songName);
                                     }),
                                 )
                             ]
