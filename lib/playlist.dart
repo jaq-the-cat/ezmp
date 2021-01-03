@@ -95,7 +95,7 @@ class PlaylistState extends State<PlaylistPage> {
             floatingActionButton:  ElevatedButton.icon(
                 icon: Icon(Icons.music_note),
                 label: Text("Add Song"),
-                onPressed: () => showAddSongDialog(context, () {}),
+                onPressed: () => showAddSongDialog(context).then((songs) => print(songs)),
             ),
         );
     }
