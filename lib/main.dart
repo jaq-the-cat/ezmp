@@ -36,7 +36,7 @@ class HomePageState extends State<HomePage> {
     bool newPlaylistOpen = false;
     TextEditingController nameController = TextEditingController();
 
-    Map<String, List<String>> playlists = getPlaylists();
+    Map<String, Set<String>> playlists = getPlaylists();
 
     List<Widget> makePlaylistWidgets() {
         List<Widget> list = [];
