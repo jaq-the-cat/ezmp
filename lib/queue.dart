@@ -3,8 +3,8 @@ import 'dart:collection';
 class _Queue {
     bool playing = false;
     bool shuffle = false;
-    int _current;
-    List<String> _q;
+    int _current = 0;
+    List<String> _q = [];
 
     void togglePlayPause() => this.playing ^= true;
 
