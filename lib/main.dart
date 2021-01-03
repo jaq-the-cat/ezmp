@@ -153,8 +153,10 @@ class HomePageState extends State<HomePage> {
                                 child: Text("Create"),
                                 onPressed: () {
                                     setState(() {
-                                        playlists[nameController.text] = [];
-                                        nameController.clear();
+                                        if (nameController.text != null && nameController.text != "") {
+                                            playlists[nameController.text] = [];
+                                            nameController.clear();
+                                        }
                                         newPlaylistOpen ^= true;
                                     });
                                 },
