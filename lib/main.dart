@@ -203,27 +203,25 @@ class PlaylistItem extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-        return GestureDetector(
+        return TextButton(
+            onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PlaylistPage(name, songs))
+                );
+            },
             onLongPress: () => removeFromPlaylist(name),
-            child: TextButton(
-                onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => PlaylistPage(name, songs))
-                    );
-                },
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                        Text(
-                            name,
-                            style: TextStyle(
-                                fontSize: 20,
-                            ),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                    Text(
+                        name,
+                        style: TextStyle(
+                            fontSize: 20,
                         ),
-                        Icon(Icons.keyboard_arrow_right),
-                    ],
-                ),
+                    ),
+                    Icon(Icons.keyboard_arrow_right),
+                ],
             ),
         );
     }
