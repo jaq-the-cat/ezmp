@@ -77,7 +77,10 @@ class PlaylistState extends State<PlaylistPage> {
                                 IconButton(
                                     icon: Icon(Icons.menu),
                                     iconSize: 18,
-                                    onPressed: () {},
+                                    onPressed: () => showEditDialog(context).then((r) {
+                                        print(r.playNext);
+                                        print(r.remove);
+                                    }),
                                 )
                             ]
                         ),
@@ -101,11 +104,23 @@ Future<_AfterMenu> showEditDialog(BuildContext context) {
                 title: Text("Edit Song"),
                 children: <Widget>[
                     SimpleDialogOption(
-                        child: Text("Play next"),
+                        child: Row(
+                            children: <Widget>[
+                                Icon(Icons.play_arrow, size: 16),
+                                SizedBox(width: 8),
+                                Text("Play next"),
+                            ],
+                        ),
                         onPressed: () => Navigator.of(context).pop(_AfterMenu(playNext: true)),
                     ),
                     SimpleDialogOption(
-                        child: Text("Remove"),
+                        child: Row(
+                            children: <Widget>[
+                                Icon(Icons.delete, size: 16),
+                                SizedBox(width: 8),
+                                Text("Remove"),
+                            ],
+                        ),
                         onPressed: () => Navigator.of(context).pop(_AfterMenu(remove: true)),
                     ),
                 ]
