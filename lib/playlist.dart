@@ -95,36 +95,3 @@ class PlaylistState extends State<PlaylistPage> {
         );
     }
 }
-
-Future<_AfterMenu> showEditDialog(BuildContext context) {
-    return showDialog<_AfterMenu>(
-        context: context,
-        builder: (BuildContext context) =>
-            SimpleDialog(
-                title: Text("Edit Song"),
-                children: <Widget>[
-                    SimpleDialogOption(
-                        child: Row(
-                            children: <Widget>[
-                                Icon(Icons.play_arrow, size: 16),
-                                SizedBox(width: 8),
-                                Text("Play next"),
-                            ],
-                        ),
-                        onPressed: () => Navigator.of(context).pop(_AfterMenu(playNext: true)),
-                    ),
-                    SimpleDialogOption(
-                        child: Row(
-                            children: <Widget>[
-                                Icon(Icons.delete, size: 16),
-                                SizedBox(width: 8),
-                                Text("Remove"),
-                            ],
-                        ),
-                        onPressed: () => Navigator.of(context).pop(_AfterMenu(remove: true)),
-                    ),
-                ]
-
-            ),
-    );
-}

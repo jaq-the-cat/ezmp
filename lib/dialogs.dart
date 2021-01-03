@@ -95,3 +95,37 @@ Future<bool> confirmDelete(String playlist, Function onAccept, BuildContext cont
         }
     );
 }
+
+Future<Widget> showEditDialog(BuildContext context, Function onPlayNext, Function onRemove) {
+    return showDialog<Widget>(
+        context: context,
+        builder: (BuildContext context) =>
+            SimpleDialog(
+                title: Text("Edit Song"),
+                children: <Widget>[
+                    SimpleDialogOption(
+                        child: Row(
+                            children: <Widget>[
+                                Icon(Icons.play_arrow, size: 16),
+                                SizedBox(width: 8),
+                                Text("Play next"),
+                            ],
+                        ),
+                        onPressed: onPlayNext,
+                    ),
+                    SimpleDialogOption(
+                        child: Row(
+                            children: <Widget>[
+                                Icon(Icons.delete, size: 16),
+                                SizedBox(width: 8),
+                                Text("Remove"),
+                            ],
+                        ),
+                        onPressed: onRemove,
+                        //onPressed: () => Navigator.of(context).pop(_AfterMenu(remove: true)),
+                    ),
+                ]
+
+            ),
+    );
+}
