@@ -77,31 +77,29 @@ class HomePageState extends State<HomePage> {
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         shrinkWrap: true,
                         children: <Widget>[
-                            Form(
-                                child: Column(
-                                    children: <Widget>[
-                                        TextFormField(
-                                            autofocus: true,
-                                            controller: ctrl,
-                                        ),
-                                        Row(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            children: <Widget>[
-                                                TextButton(
-                                                    child: Text("Cancel"),
-                                                    onPressed: () => Navigator.of(context).pop(""),
-                                                ),
-                                                TextButton(
-                                                    child: Text("Rename"),
-                                                    onPressed: () => Navigator.of(context).pop(ctrl.text),
-                                                ),
-                                            ]
-                                        )
-                                    ]
-                                )
-                            )
+                            Column(
+                                children: <Widget>[
+                                    TextFormField(
+                                        autofocus: true,
+                                        controller: ctrl,
+                                    ),
+                                    Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: <Widget>[
+                                            TextButton(
+                                                child: Text("Cancel"),
+                                                onPressed: () => Navigator.of(context).pop(""),
+                                            ),
+                                            TextButton(
+                                                child: Text("Rename"),
+                                                onPressed: () => Navigator.of(context).pop(ctrl.text),
+                                            ),
+                                        ]
+                                    )
+                                ]
+                            ),
                         ],
-                    )
+                    ),
                 );
             }
         );
@@ -141,29 +139,28 @@ class HomePageState extends State<HomePage> {
             list.add(PlaylistItem(name, playlists[name], this.heldOnPlaylist));
         if (newPlaylistOpen) {
             list.add(
-                Form(
-                    child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                            children: <Widget>[
-                                Expanded(
-                                    child: TextFormField(
-                                        controller: nameController,
-                                    ),
+                Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                        children: <Widget>[
+                            Expanded(
+                                child: TextFormField(
+                                    autofocus: true,
+                                    controller: nameController,
                                 ),
-                                TextButton(
-                                    child: Text("Create"),
-                                    onPressed: () {
-                                        setState(() {
-                                            playlists[nameController.text] = [];
-                                            nameController.clear();
-                                            newPlaylistOpen ^= true;
-                                        });
-                                    },
-                                )
-                            ]
-                        )
-                    ),
+                            ),
+                            TextButton(
+                                child: Text("Create"),
+                                onPressed: () {
+                                    setState(() {
+                                        playlists[nameController.text] = [];
+                                        nameController.clear();
+                                        newPlaylistOpen ^= true;
+                                    });
+                                },
+                            )
+                        ]
+                    )
                 ),
             );
         }
