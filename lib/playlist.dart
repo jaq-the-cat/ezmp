@@ -43,25 +43,35 @@ class PlaylistState extends State<PlaylistPage> {
                     (songName) => Container(
                         margin: EdgeInsets.all(10),
                         padding: EdgeInsets.only(left: 5),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                                Text(
-                                    songName,
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                    )
+                                Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                        Text(
+                                            songName,
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.white,
+                                            )
+                                        ),
+                                        Text(
+                                            "XX:XX",
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.white38,
+                                            )
+                                        ),
+                                    ],
                                 ),
-                                Text(
-                                    "XX:XX",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.white38,
-                                    )
-                                ),
-                            ],
+                                IconButton(
+                                    icon: Icon(Icons.edit),
+                                    iconSize: 18,
+                                    onPressed: () {},
+                                )
+                            ]
                         ),
                     ),
                 ).toList(),
