@@ -29,25 +29,16 @@ class PlaylistState extends State<PlaylistPage> {
                 title: Text(widget.name),
             ),
             body: ListView(
-                children: <Widget>[
+                children: <Widget>[ // top bit
                     Container(
                         padding: EdgeInsets.only(top: 10),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                                ElevatedButton.icon(
-                                    icon: Icon(Icons.shuffle),
-                                    label: Text("Shuffle"),
-                                    onPressed: () => globalQueue.toggleShuffle(),
-                                ),
-                                SizedBox(width: 5),
-                                ElevatedButton.icon(
-                                    icon: Icon(Icons.play_arrow),
-                                    label: Text("Play"),
-                                    onPressed: () => globalQueue.togglePlayPause(),
-                                ),
-                            ]
-                        )
+                        child: Center(
+                            child: ElevatedButton.icon(
+                                icon: Icon(Icons.music_note),
+                                label: Text("Add Song"),
+                                onPressed: () => showAddSongDialog(context).then((songs) => setState(() => widget.songs.addAll(songs))),
+                            ),
+                        ),
                     ),
                 ] + widget.songs.map(
                     (songName) => Container(
@@ -95,10 +86,21 @@ class PlaylistState extends State<PlaylistPage> {
                     ),
                 ).toList(),
             ),
-            floatingActionButton:  ElevatedButton.icon(
-                icon: Icon(Icons.music_note),
-                label: Text("Add Song"),
-                onPressed: () => showAddSongDialog(context).then((songs) => setState(() => widget.songs.addAll(songs))),
+            floatingActionButton: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                    ElevatedButton.icon(
+                        icon: Icon(Icons.play_arrow),
+                        label: Text("Play"),
+                        onPressed: () => globalQueue.togglePlayPause(),
+                    ),
+                    SizedBox(width: 10),
+                    ElevatedButton.icon(
+                        icon: Icon(Icons.shuffle),
+                        label: Text("Shuffle"),
+                        onPressed: () => globalQueue.toggleShuffle(),
+                    ),
+                ],
             ),
         );
     }

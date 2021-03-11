@@ -7,6 +7,24 @@ final newPlaylistKey = GlobalKey<HomePageState>();
 
 void main() => runApp(MyApp());
 
+Widget newPlaylistForm(TextEditingController nameController, {void Function() onCreate}) => Container(
+    margin: EdgeInsets.symmetric(horizontal: 10),
+    child: Row(
+        children: <Widget>[
+            Expanded(
+                child: TextFormField(
+                    autofocus: true,
+                    controller: nameController,
+                ),
+            ),
+            TextButton(
+                child: Text("Create"),
+                onPressed: onCreate,
+            ),
+        ],
+    ),
+);
+
 class MyApp extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
@@ -49,33 +67,16 @@ class HomePageState extends State<HomePage> {
                 );
         }));
         if (newPlaylistOpen) {
-            list.add(
-                Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                        children: <Widget>[
-                            Expanded(
-                                child: TextFormField(
-                                    autofocus: true,
-                                    controller: nameController,
-                                ),
-                            ),
-                            TextButton(
-                                child: Text("Create"),
-                                onPressed: () {
-                                    setState(() {
-                                        if (nameController.text != null && nameController.text != "") {
-                                            playlists[nameController.text] = Set();
-                                            nameController.clear();
-                                        }
-                                        newPlaylistOpen ^= true;
-                                    });
-                                },
-                            )
-                        ]
-                    )
-                ),
-            );
+            list.add(newPlaylistForm(
+                nameController,
+                onCreate: () => setState(() {
+                    if (nameController.text != null && nameController.text != "") {
+                        playlists[nameController.text] = Set();
+                        nameController.clear();
+                    }
+                    newPlaylistOpen ^= true;
+                }),
+            ));
         }
         return list;
     }
