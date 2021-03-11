@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'dialogs.dart';
 import 'queue.dart';
 
-@immutable
-class _AfterMenu {
-    _AfterMenu({this.playNext, this.remove});
-
-    final bool playNext;
-    final bool remove;
+enum WhatDo {
+    PlayNext,
+    Remove,
 }
 
 List<Widget> getSongListWidget(Set<String> songs, BuildContext context) => songs.map(
@@ -42,13 +39,17 @@ List<Widget> getSongListWidget(Set<String> songs, BuildContext context) => songs
                     iconSize: 18,
                     onPressed: () => showEditDialog(
                         context,
-                        () => Navigator.of(context).pop(_AfterMenu(playNext: true)),
-                        () => Navigator.of(context).pop(_AfterMenu(remove: true)),
+                        () => Navigator.of(context).pop(WhatDo.PlayNext),
+                        () => Navigator.of(context).pop(WhatDo.Remove),
                     ).then((r) {
-                        if (r.playNext == true)
-                            globalQueue.playNext(songName);
-                        else if (r.remove == true)
-                            globalQueue.remove(songName);
+                        switch (r) {
+                            case WhatDo.PlayNext:
+                                globalQueue.playNext(songName);
+                                break;
+                            case WhatDo.Remove:
+                                globalQueue.remove(songName);
+                                break;
+                        }
                     }),
                 )
             ]
