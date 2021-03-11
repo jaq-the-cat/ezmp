@@ -7,7 +7,10 @@ enum WhatDo {
     Remove,
 }
 
-List<Widget> getSongListWidget(BuildContext context, Set<String> songs, {void Function(String songName) onRemove}) => songs.map(
+List<Widget> getSongListWidget(BuildContext context, Set<String> songs, {
+        void Function(String songName) onRemove,
+        void Function() onChange
+    }) => songs.map(
     (songName) => Container(
         margin: EdgeInsets.all(10),
         padding: EdgeInsets.only(left: 5),
@@ -45,11 +48,13 @@ List<Widget> getSongListWidget(BuildContext context, Set<String> songs, {void Fu
                         switch (r) {
                             case WhatDo.PlayNext:
                                 globalQueue.playNext(songName);
+                                onChange();
                                 break;
                             case WhatDo.Remove:
                                 globalQueue.remove(songName);
                                 if (onRemove != null)
                                     onRemove(songName);
+                                onChange();
                                 break;
                         }
                     }),

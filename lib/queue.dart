@@ -21,6 +21,8 @@ class _Queue {
     void moveTo(String song) => this._current = this._q.indexOf(song);
 
     void playNext(String song) {
+        if (this._q.indexOf(song) == this._current)
+            return;
         this._q.remove(song);
         if (this._current < this._q.length-1)
             this._q.insert(_current+1, song);
@@ -46,3 +48,6 @@ class _Queue {
 }
 
 _Queue globalQueue = _Queue();
+Stream<List<String>> queueStream() async* {
+    yield globalQueue.songs;
+}
