@@ -33,7 +33,8 @@ class PlaylistState extends State<PlaylistPage> {
                             ),
                         ),
                     ),
-                ] + getSongListWidget(widget.songs, context),
+                ] + getSongListWidget(context, widget.songs,
+                    onRemove: (String songName) => setState(() => widget.songs.remove(songName))),
             ),
             floatingActionButton: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
