@@ -122,17 +122,20 @@ class PlaylistItem extends StatelessWidget {
                 );
             },
             onLongPress: onLongPress,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                    Text(
-                        name,
-                        style: TextStyle(
-                            fontSize: 20,
+            child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                        Text(
+                            name,
+                            style: TextStyle(
+                                fontSize: 20,
+                            ),
                         ),
-                    ),
-                    Icon(Icons.keyboard_arrow_right),
-                ],
+                        Icon(Icons.keyboard_arrow_right),
+                    ],
+                ),
             ),
         );
     }
