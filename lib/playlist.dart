@@ -21,39 +21,31 @@ class PlaylistState extends State<PlaylistPage> {
         return Scaffold(
             appBar: AppBar(
                 title: Text(widget.name),
-            ),
-            body: ListView(
-                children: <Widget>[ // top bit
-                    Container(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Center(
-                            child: ElevatedButton.icon(
-                                icon: Icon(Icons.music_note),
-                                label: Text("Add Song"),
-                                onPressed: () => showAddSongDialog(context).then((songs) => setState(() => widget.songs.addAll(songs ?? []))),
-                            ),
-                        ),
-                    ),
-                ] + getSongListWidget(context, widget.songs,
-                    onRemove: (String songName) => setState(() => widget.songs.remove(songName))),
-            ),
-            floatingActionButton: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                    ElevatedButton.icon(
-                        icon: Icon(Icons.shuffle),
-                        label: Text("Shuffle"),
-                        onPressed: () => globalQueue.toggleShuffle(),
-                    ),
-                    SizedBox(width: 10),
-                    ElevatedButton.icon(
-                        icon: Icon(Icons.play_arrow),
-                        label: Text("Play"),
-                        onPressed: () => globalQueue.togglePlayPause(),
-                    ),
+                actions: [
+                    openQueuePageButton(context),
                 ],
             ),
-            persistentFooterButtons: [openQueuePageButton(context)],
+            body: ListView(
+                children: getSongListWidget(context, widget.songs,
+                    onRemove: (String songName) => setState(() => widget.songs.remove(songName))),
+            ),
+            persistentFooterButtons: [
+                TextButton.icon(
+                    icon: Icon(Icons.music_note),
+                    label: Text("Add Song"),
+                    onPressed: () => showAddSongDialog(context).then((songs) => setState(() => widget.songs.addAll(songs ?? []))),
+                ),
+                TextButton.icon(
+                    icon: Icon(Icons.shuffle),
+                    label: Text("Shuffle"),
+                    onPressed: () => globalQueue.toggleShuffle(),
+                ),
+                TextButton.icon(
+                    icon: Icon(Icons.play_arrow),
+                    label: Text("Play"),
+                    onPressed: () => globalQueue.togglePlayPause(),
+                ),
+            ],
         );
     }
 }

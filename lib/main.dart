@@ -87,21 +87,25 @@ class HomePageState extends State<HomePage> {
         return Scaffold(
             appBar: AppBar(
                 title: Text(widget.title),
+                actions: [
+                    openQueuePageButton(context),
+                ],
             ),
             body: ListView(
                 children: makePlaylistWidgets(),
             ),
-            floatingActionButton: ElevatedButton.icon(
-                icon: Icon(Icons.add),
-                label: Text("New Playlist"),
-                onPressed: () {
-                    setState(() {
-                        nameController.clear();
-                        newPlaylistOpen ^= true;
-                    });
-                },
-            ),
-            persistentFooterButtons: [openQueuePageButton(context)],
+            persistentFooterButtons: [
+                TextButton.icon(
+                    icon: Icon(Icons.add),
+                    label: Text("New Playlist"),
+                    onPressed: () {
+                        setState(() {
+                            nameController.clear();
+                            newPlaylistOpen ^= true;
+                        });
+                    },
+                )
+            ],
         );
     }
 }
