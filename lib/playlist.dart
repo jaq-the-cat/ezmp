@@ -38,12 +38,15 @@ class PlaylistState extends State<PlaylistPage> {
                 TextButton.icon(
                     icon: Icon(Icons.shuffle),
                     label: Text("Shuffle"),
-                    onPressed: () => globalQueue.toggleShuffle(),
+                    onPressed: () {
+                        globalQueue.toggleShuffle();
+                        globalQueue.play(widget.songs);
+                    }
                 ),
                 TextButton.icon(
                     icon: Icon(Icons.play_arrow),
                     label: Text("Play"),
-                    onPressed: () => globalQueue.togglePlayPause(),
+                    onPressed: () => globalQueue.play(widget.songs),
                 ),
             ],
         );

@@ -6,9 +6,15 @@ class _Queue {
 
     List<String> get songs => this._q;
 
-    void togglePlayPause() => this.playing ^= true;
+    void play(Set<String> songs) {
+        this._q.clear();
+        this._q.addAll(songs);
+        this.playing = true;
+    }
 
-    void toggleShuffle() => this.shuffle = true;
+    void toggleShuffle() => this.shuffle ^= true;
+
+    void togglePlayPause() => this.playing ^= true;
 
     void addToQueue(String song) => this._q.add(song);
 
