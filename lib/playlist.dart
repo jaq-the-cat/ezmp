@@ -39,7 +39,7 @@ class PlaylistState extends State<PlaylistPage> {
                     icon: Icon(Icons.shuffle),
                     label: Text("Shuffle"),
                     onPressed: () {
-                        globalQueue.toggleShuffle();
+                        globalQueue.shuffle = true;
                         globalQueue.play(widget.songs);
                     }
                 ),

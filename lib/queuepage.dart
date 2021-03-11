@@ -15,6 +15,18 @@ class QueuePageState extends State<QueuePage> {
         body: ListView(
             children: getSongListWidget(context, globalQueue.songs.toSet(), onChange: () => setState(() {})),
         ),
+        persistentFooterButtons: [
+            TextButton.icon(
+                icon: Icon(Icons.shuffle),
+                label: globalQueue.shuffle ? Text("Shuffle on") : Text("Shuffle off"),
+                onPressed: () => setState(() => globalQueue.toggleShuffle()),
+            ),
+            IconButton(
+                icon: globalQueue.playing ? Icon(Icons.pause) : Icon(Icons.play_arrow),
+                color: Colors.deepOrange,
+                onPressed: () => setState(() => globalQueue.togglePlayPause()),
+            ),
+        ]
     );
 }
 
