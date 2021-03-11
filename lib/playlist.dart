@@ -36,7 +36,7 @@ class PlaylistState extends State<PlaylistPage> {
                             child: ElevatedButton.icon(
                                 icon: Icon(Icons.music_note),
                                 label: Text("Add Song"),
-                                onPressed: () => showAddSongDialog(context).then((songs) => setState(() => widget.songs.addAll(songs))),
+                                onPressed: () => showAddSongDialog(context).then((songs) => setState(() => widget.songs.addAll(songs ?? []))),
                             ),
                         ),
                     ),
@@ -90,15 +90,15 @@ class PlaylistState extends State<PlaylistPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                     ElevatedButton.icon(
-                        icon: Icon(Icons.play_arrow),
-                        label: Text("Play"),
-                        onPressed: () => globalQueue.togglePlayPause(),
-                    ),
-                    SizedBox(width: 10),
-                    ElevatedButton.icon(
                         icon: Icon(Icons.shuffle),
                         label: Text("Shuffle"),
                         onPressed: () => globalQueue.toggleShuffle(),
+                    ),
+                    SizedBox(width: 10),
+                    ElevatedButton.icon(
+                        icon: Icon(Icons.play_arrow),
+                        label: Text("Play"),
+                        onPressed: () => globalQueue.togglePlayPause(),
                     ),
                 ],
             ),
