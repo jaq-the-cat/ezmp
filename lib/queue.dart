@@ -4,6 +4,8 @@ class _Queue {
     int _current = 0;
     List<String> _q = [];
 
+    List<String> get songs => this._q;
+
     void togglePlayPause() => this.playing ^= true;
 
     void toggleShuffle() => this.shuffle = true;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dialogs.dart';
 import 'queue.dart';
 import 'songlistwidget.dart';
+import 'queuepage.dart';
 
 class PlaylistPage extends StatefulWidget {
 
@@ -52,6 +53,7 @@ class PlaylistState extends State<PlaylistPage> {
                     ),
                 ],
             ),
+            persistentFooterButtons: [openQueuePageButton(context)],
         );
     }
 }

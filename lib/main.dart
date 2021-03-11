@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'musicio.dart';
 import 'playlist.dart';
 import 'dialogs.dart';
+import 'queuepage.dart';
 
 final newPlaylistKey = GlobalKey<HomePageState>();
 
@@ -99,7 +100,8 @@ class HomePageState extends State<HomePage> {
                         newPlaylistOpen ^= true;
                     });
                 },
-            )
+            ),
+            persistentFooterButtons: [openQueuePageButton(context)],
         );
     }
 }
