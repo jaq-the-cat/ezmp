@@ -18,9 +18,13 @@ class _Queue {
 
     void addToQueue(String song) => this._q.add(song);
 
-    void moveTo(String song) => this._current = this._q.indexOf(song);
+    void moveTo(String song) {
+        if (!this._q.contains(songs)) return;
+        this._current = this._q.indexOf(song);
+    }
 
     void playNext(String song) {
+        if (!this._q.contains(songs)) return;
         if (this._q.indexOf(song) == this._current)
             return;
         this._q.remove(song);
@@ -30,24 +34,32 @@ class _Queue {
             this._q.add(song);
     }
 
-    void remove(String song) => this._q.remove(song);
+    void remove(String song) {
+        if (!this._q.contains(songs)) return;
+        this._q.remove(song);
+    }
 
     void seek() {} // go to xx:xx in song
 
     void next() {
-        this._current++;
-        if (this._current >= this._q.length)
-            this._current = 0; // loop around
+        if (this.shuffle) {
+
+        } else {
+            this._current++;
+            if (this._current >= this._q.length)
+                this._current = 0; // loop around
+        }
     }
 
     void previous() {
-        this._current--;
-        if (this._current <= 0)
-            this._current = this._q.length-1; // loop around
+        if (this.shuffle) {
+
+        } else {
+            this._current--;
+            if (this._current <= 0)
+                this._current = this._q.length-1; // loop around
+        }
     }
 }
 
 _Queue globalQueue = _Queue();
-Stream<List<String>> queueStream() async* {
-    yield globalQueue.songs;
-}
