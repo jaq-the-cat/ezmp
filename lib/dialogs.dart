@@ -32,8 +32,9 @@ Future<void> heldOnPlaylist(BuildContext context, String playlist, {Function onR
     );
 }
 
-Future<String> renamePlaylist(BuildContext context, String playlist ) async {
+Future<String> renamePlaylist(BuildContext context, String playlist, void Function(String) onRename) async {
     final ctrl = TextEditingController();
+    ctrl.text = playlist;
     return showDialog<String>(
         context: context,
         builder: (BuildContext context) {
@@ -52,12 +53,15 @@ Future<String> renamePlaylist(BuildContext context, String playlist ) async {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: <Widget>[
                                         TextButton(
-                                            child: Text("Cancel"),
+                                            child: Text("CANCEL"),
                                             onPressed: () => Navigator.of(context).pop(""),
                                         ),
                                         TextButton(
-                                            child: Text("Rename"),
-                                            onPressed: () => Navigator.of(context).pop(ctrl.text),
+                                            child: Text("RENAME"),
+                                            onPressed: () {
+                                                onRename(ctrl.text);
+                                                Navigator.of(context).pop(ctrl.text);
+                                            },
                                         ),
                                     ]
                                 )
@@ -86,7 +90,7 @@ Future<bool> confirmDelete(BuildContext context, String playlist, Function onAcc
                         onPressed: () => Navigator.of(context).pop(false),
                     ),
                     TextButton(
-                        child: Text("ACCEPT"),
+                        child: Text("CONFIRM"),
                         onPressed: () {
                             onAccept();
                             Navigator.of(context).pop(true);

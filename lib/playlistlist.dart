@@ -52,7 +52,8 @@ class PlaylistListState extends State<PlaylistList> {
                     context,
                     name,
                     onRename: () => setState(() {
-                        renamePlaylist(context, name);
+                        renamePlaylist(context, name,
+                            (newName) => setState(() => playlists.renameKey(name, newName)));
                     }),
                     onDelete: () => setState(() {
                         confirmDelete(context, name,

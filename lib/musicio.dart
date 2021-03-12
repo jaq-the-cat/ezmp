@@ -1,3 +1,11 @@
+extension RenameKey on Map {
+    void renameKey(String oldKey, String newKey) {
+        var value = this[oldKey];
+        this.remove(oldKey);
+        this[newKey] = value;
+    }
+}
+
 Map<String, Set<String>> getPlaylists() {
     return {
         "Playlist 1": ["/path/to/song/1", "/path/to/song/2"].toSet(),
