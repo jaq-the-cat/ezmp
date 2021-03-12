@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'musicio.dart';
 
-Future<void> heldOnPlaylist(String playlist, Function onRename, Function onDelete, BuildContext context) async {
+Future<String> newPlaylist(BuildContext context) {
+
+}
+
+Future<void> heldOnPlaylist(BuildContext context, String playlist, {Function onRename, Function onDelete}) async {
     return showDialog<void>(
         context: context,
         builder: (BuildContext context) {
@@ -10,19 +14,17 @@ Future<void> heldOnPlaylist(String playlist, Function onRename, Function onDelet
                 children: <Widget>[
                     SimpleDialogOption(
                         child: Text("Rename"),
-                        onPressed: onRename,
-                        //onPressed: () => renamePlaylist(playlist).then((newName) {
-                            //if (newName != "" && !playlists.containsKey(newName))
-                                //setState(() => playlists[newName] = playlists.remove(playlist));
-                            //Navigator.of(context).pop();
-                        //}),
+                        onPressed: () {
+                            Navigator.of(context).pop();
+                            onRename();
+                        },
                     ),
                     SimpleDialogOption(
                         child: Text("Delete"),
-                        onPressed: onDelete,
-                        //onPressed: () => confirmDelete(playlist).then((selected) {
-                            //if (selected) Navigator.of(context).pop();
-                        //}),
+                        onPressed: () {
+                            Navigator.of(context).pop();
+                            onDelete();
+                        },
                     )
                 ]
             );
@@ -30,7 +32,7 @@ Future<void> heldOnPlaylist(String playlist, Function onRename, Function onDelet
     );
 }
 
-Future<String> renamePlaylist(String playlist, BuildContext context) async {
+Future<String> renamePlaylist(BuildContext context, String playlist ) async {
     final ctrl = TextEditingController();
     return showDialog<String>(
         context: context,
@@ -68,7 +70,7 @@ Future<String> renamePlaylist(String playlist, BuildContext context) async {
     );
 }
 
-Future<bool> confirmDelete(String playlist, Function onAccept, BuildContext context) async {
+Future<bool> confirmDelete(BuildContext context, String playlist, Function onAccept) async {
     return showDialog<bool>(
         context: context,
         builder: (BuildContext context) {

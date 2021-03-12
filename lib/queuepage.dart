@@ -30,4 +30,8 @@ class QueuePageState extends State<QueuePage> {
     );
 }
 
-Widget openQueuePageButton(BuildContext context) => TextButton.icon(icon: Icon(Icons.queue), label: Text("Queue"), onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => QueuePage())));
+Widget openQueuePageButton(BuildContext context) => TextButton.icon(
+    icon: Icon(Icons.queue),
+    label: Text("Queue"),
+    onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => QueuePage()))
+);

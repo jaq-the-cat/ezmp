@@ -15,29 +15,9 @@ class PlaylistList extends StatefulWidget {
 
 class PlaylistListState extends State<PlaylistList> {
 
-    bool newPlaylistOpen = false;
-    TextEditingController nameController = TextEditingController();
+    String newPlaylistName = "";
 
     Map<String, Set<String>> playlists = getPlaylists();
-
-    Widget newPlaylistForm(void Function() onCreate) => Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-            children: <Widget>[
-                Expanded(
-                    child: TextFormField(
-                        autofocus: true,
-                        controller: this.nameController,
-                        cursorColor: Colors.deepOrange,
-                    ),
-                ),
-                TextButton(
-                    child: Text("Create"),
-                    onPressed: onCreate,
-                ),
-            ],
-        ),
-    );
 
     Widget playlistItem(String name, Set<String> songs, {void Function() onLongPress}) => TextButton(
         onPressed: () {
@@ -68,21 +48,24 @@ class PlaylistListState extends State<PlaylistList> {
         List<Widget> list = [];
         for (String name in playlists.keys)
             list.add(playlistItem(name, playlists[name], onLongPress: () {
-                confirmDelete(
-                    name,
-                    () => setState(() => playlists.remove(name)),
+                heldOnPlaylist(
                     context,
+                    name,
+                    onRename: () => setState(() {
+                        renamePlaylist(context, name);
+                    }),
+                    onDelete: () => setState(() {
+                        confirmDelete(context, name,
+                            () => setState(() => playlists.remove(name)),
+                        );
+                    })
                 );
+                //confirmDelete(
+                    //name,
+                    //() => setState(() => playlists.remove(name)),
+                    //context,
+                //);
         }));
-        if (newPlaylistOpen) {
-            list.add(newPlaylistForm(() => setState(() {
-                if (nameController.text != null && nameController.text != "") {
-                    playlists[nameController.text] = Set();
-                    nameController.clear();
-                }
-                newPlaylistOpen ^= true;
-            })));
-        }
         return list;
     }
 
@@ -104,8 +87,7 @@ class PlaylistListState extends State<PlaylistList> {
                     label: Text("New Playlist"),
                     onPressed: () {
                         setState(() {
-                            nameController.clear();
-                            newPlaylistOpen ^= true;
+                            newPlaylistName = "";
                         });
                     },
                 )
