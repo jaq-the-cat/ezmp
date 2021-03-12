@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'songlistwidget.dart';
 import 'queue.dart';
+import 'dart:math' as math;
 
 class QueuePage extends StatefulWidget {
     @override
@@ -15,18 +16,31 @@ class QueuePageState extends State<QueuePage> {
         body: ListView(
             children: getSongListWidget(context, songs: globalQueue.songs.toSet(), onChange: () => setState(() {})),
         ),
-        persistentFooterButtons: [
-            TextButton.icon(
-                icon: Icon(Icons.shuffle),
-                label: globalQueue.shuffle ? Text("Shuffle on") : Text("Shuffle off"),
-                onPressed: () => setState(() => globalQueue.toggleShuffle()),
-            ),
-            IconButton(
-                icon: globalQueue.playing ? Icon(Icons.pause) : Icon(Icons.play_arrow),
-                color: Colors.deepOrange,
-                onPressed: () => setState(() => globalQueue.togglePlayPause()),
-            ),
-        ]
+        bottomNavigationBar: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+                TextButton.icon(
+                    icon: Icon(Icons.shuffle),
+                    label: globalQueue.shuffle ? Text("Shuffle on") : Text("Shuffle off"),
+                    onPressed: () => setState(() => globalQueue.toggleShuffle()),
+                ),
+                IconButton(
+                    icon: Icon(Icons.skip_previous),
+                    color: Colors.deepOrange,
+                    onPressed: () => setState(() => globalQueue.previous()),
+                ),
+                IconButton(
+                    icon: globalQueue.playing ? Icon(Icons.pause) : Icon(Icons.play_arrow),
+                    color: Colors.deepOrange,
+                    onPressed: () => setState(() => globalQueue.togglePlayPause()),
+                ),
+                IconButton(
+                    icon: Icon(Icons.skip_next),
+                    color: Colors.deepOrange,
+                    onPressed: () => setState(() => globalQueue.next()),
+                ),
+            ]
+        ),
     );
 }
 
