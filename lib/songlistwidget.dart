@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'musicio.dart';
 import 'dialogs.dart';
 import 'queue.dart';
@@ -10,11 +11,11 @@ enum WhatDo {
 
 List<Widget> getSongListWidget(BuildContext context, {
     String name,
-    Set<String> songs,
-    void Function(String songName) onRemove,
+    Set<SongInfo> songs,
+    void Function(SongInfo song) onRemove,
     void Function() onChange
 }) {
-    Set<String> _songs;
+    Set<SongInfo> _songs;
     if (songs == null || songs.isEmpty) {
         if (name == null || name.isEmpty)
             return [];
@@ -24,7 +25,7 @@ List<Widget> getSongListWidget(BuildContext context, {
     }
 
     return List<Widget>.from(_songs.map(
-        (songName) => Container(
+        (song) => Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.only(left: 5),
             child: Row(
@@ -34,7 +35,7 @@ List<Widget> getSongListWidget(BuildContext context, {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                             Text(
-                                songName,
+                                song.uri,
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
@@ -42,7 +43,7 @@ List<Widget> getSongListWidget(BuildContext context, {
                                 )
                             ),
                             Text(
-                                "XX:XX",
+                                Duration(milliseconds: int.parse(song.duration)).toString(),
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.white38,
@@ -60,14 +61,14 @@ List<Widget> getSongListWidget(BuildContext context, {
                         ).then((r) {
                             switch (r) {
                                 case WhatDo.PlayNext:
-                                    globalQueue.playNext(songName);
+                                    globalQueue.playNext(song);
                                     if (onChange != null)
                                         onChange();
                                     break;
                                 case WhatDo.Remove:
-                                    globalQueue.remove(songName);
+                                    globalQueue.remove(song);
                                     if (onRemove != null)
-                                        onRemove(songName);
+                                        onRemove(song);
                                     if (onChange != null)
                                         onChange();
                                     break;

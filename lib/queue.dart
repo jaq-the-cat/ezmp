@@ -1,12 +1,14 @@
+import 'package:flutter_audio_query/flutter_audio_query.dart';
+
 class _Queue {
     bool playing = false;
     bool shuffle = false;
     int _current = 0;
-    List<String> _q = [];
+    List<SongInfo> _q = [];
 
-    List<String> get songs => this._q;
+    List<SongInfo> get songs => this._q;
 
-    void play(Set<String> songs) {
+    void play(Iterable<SongInfo> songs) {
         this._q.clear();
         this._q.addAll(songs);
         this.playing = true;
@@ -16,14 +18,14 @@ class _Queue {
 
     void togglePlayPause() => this.playing ^= true;
 
-    void addToQueue(String song) => this._q.add(song);
+    void addToQueue(SongInfo song) => this._q.add(song);
 
-    void moveTo(String song) {
+    void moveTo(SongInfo song) {
         if (!this._q.contains(songs)) return;
         this._current = this._q.indexOf(song);
     }
 
-    void playNext(String song) {
+    void playNext(SongInfo song) {
         if (!this._q.contains(songs)) return;
         if (this._q.indexOf(song) == this._current)
             return;
@@ -34,7 +36,7 @@ class _Queue {
             this._q.add(song);
     }
 
-    void remove(String song) {
+    void remove(SongInfo song) {
         if (!this._q.contains(songs)) return;
         this._q.remove(song);
     }

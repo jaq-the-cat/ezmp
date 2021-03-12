@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'musicio.dart';
 
 Future<String> _playlistNameDialogBuilder(BuildContext context, String confirmText, void Function(String) onConfirm) {
@@ -161,59 +162,65 @@ class _AddSongDialog extends StatefulWidget {
 
 class _AddSongState extends State<_AddSongDialog> {
 
-    Set<String> added = Set();
+    Set<SongInfo> added = Set();
 
     Widget build(BuildContext context) {
         return  Dialog(
-            child: ListView(
-                shrinkWrap: true,
-                padding: EdgeInsets.all(15),
-                children: getSongs().map((name) {
-                    return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                            Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+            child: FutureBuilder(
+                future: Playlists.getSongs(),
+                builder: (context, snapshot) {
+                    if (!snapshot.hasData) return Container();
+                    return ListView(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.all(15),
+                        children: snapshot.data.map((SongInfo song) {
+                            return Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                    Text(
-                                        name,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                        )
+                                    Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                            Text(
+                                                song.uri,
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.white,
+                                                )
+                                            ),
+                                            Text(
+                                                Duration(milliseconds: int.parse(song.duration)).toString(),
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors.white38,
+                                                )
+                                            ),
+                                        ],
                                     ),
-                                    Text(
-                                        "XX:XX",
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.white38,
-                                        )
+                                    IconButton(
+                                        icon: Icon(Icons.add),
+                                        iconSize: 16,
+                                        onPressed: () => setState(() => added.add(song)),
+                                    ),
+                                ],
+                            );
+                        }).toList() + [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                    TextButton(
+                                        child: Text("CANCEL"),
+                                        onPressed: () => Navigator.of(context).pop(),
+                                    ),
+                                    TextButton(
+                                        child: Text("DONE"),
+                                        onPressed: () => Navigator.of(context).pop(added),
                                     ),
                                 ],
                             ),
-                            IconButton(
-                                icon: Icon(Icons.add),
-                                iconSize: 16,
-                                onPressed: () => setState(() => added.add(name)),
-                            ),
                         ],
                     );
-                }).toList() + [
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                            TextButton(
-                                child: Text("CANCEL"),
-                                onPressed: () => Navigator.of(context).pop(),
-                            ),
-                            TextButton(
-                                child: Text("DONE"),
-                                onPressed: () => Navigator.of(context).pop(added),
-                            ),
-                        ],
-                    ),
-                ],
-            ),
+                }
+            )
         );
     }
 }
