@@ -1,40 +1,8 @@
 import 'package:flutter/material.dart';
 import 'musicio.dart';
 
-Future<String> newPlaylist(BuildContext context) {
-
-}
-
-Future<void> heldOnPlaylist(BuildContext context, String playlist, {Function onRename, Function onDelete}) async {
-    return showDialog<void>(
-        context: context,
-        builder: (BuildContext context) {
-            return SimpleDialog(
-                title: Text("Manage $playlist"),
-                children: <Widget>[
-                    SimpleDialogOption(
-                        child: Text("Rename"),
-                        onPressed: () {
-                            Navigator.of(context).pop();
-                            onRename();
-                        },
-                    ),
-                    SimpleDialogOption(
-                        child: Text("Delete"),
-                        onPressed: () {
-                            Navigator.of(context).pop();
-                            onDelete();
-                        },
-                    )
-                ]
-            );
-        }
-    );
-}
-
-Future<String> renamePlaylist(BuildContext context, String playlist, void Function(String) onRename) async {
+Future<String> _playlistNameDialogBuilder(BuildContext context, String confirmText, void Function(String) onConfirm) {
     final ctrl = TextEditingController();
-    ctrl.text = playlist;
     return showDialog<String>(
         context: context,
         builder: (BuildContext context) {
@@ -57,9 +25,9 @@ Future<String> renamePlaylist(BuildContext context, String playlist, void Functi
                                             onPressed: () => Navigator.of(context).pop(""),
                                         ),
                                         TextButton(
-                                            child: Text("RENAME"),
+                                            child: Text(confirmText.toUpperCase()),
                                             onPressed: () {
-                                                onRename(ctrl.text);
+                                                onConfirm(ctrl.text);
                                                 Navigator.of(context).pop(ctrl.text);
                                             },
                                         ),
@@ -73,6 +41,10 @@ Future<String> renamePlaylist(BuildContext context, String playlist, void Functi
         }
     );
 }
+
+Future<String> newPlaylist(BuildContext context, void Function(String) onCreate) => _playlistNameDialogBuilder(context, "create", onCreate);
+
+Future<String> renamePlaylist(BuildContext context, String playlist, void Function(String) onRename) async => _playlistNameDialogBuilder(context, "rename", onRename);
 
 Future<bool> confirmDelete(BuildContext context, String playlist, Function onAccept) async {
     return showDialog<bool>(
@@ -96,6 +68,33 @@ Future<bool> confirmDelete(BuildContext context, String playlist, Function onAcc
                             Navigator.of(context).pop(true);
                         },
                     ),
+                ]
+            );
+        }
+    );
+}
+
+Future<void> heldOnPlaylist(BuildContext context, String playlist, {Function onRename, Function onDelete}) async {
+    return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+            return SimpleDialog(
+                title: Text("Manage $playlist"),
+                children: <Widget>[
+                    SimpleDialogOption(
+                        child: Text("Rename"),
+                        onPressed: () {
+                            Navigator.of(context).pop();
+                            onRename();
+                        },
+                    ),
+                    SimpleDialogOption(
+                        child: Text("Delete"),
+                        onPressed: () {
+                            Navigator.of(context).pop();
+                            onDelete();
+                        },
+                    )
                 ]
             );
         }

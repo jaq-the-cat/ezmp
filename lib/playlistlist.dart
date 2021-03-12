@@ -15,8 +15,6 @@ class PlaylistList extends StatefulWidget {
 
 class PlaylistListState extends State<PlaylistList> {
 
-    String newPlaylistName = "";
-
     Widget playlistItem(String name, {void Function() onLongPress}) => TextButton(
         onPressed: () {
             Navigator.push(
@@ -86,7 +84,8 @@ class PlaylistListState extends State<PlaylistList> {
                     label: Text("New Playlist"),
                     onPressed: () {
                         setState(() {
-                            newPlaylistName = "";
+                            newPlaylist(context,
+                                (name) => Playlists.add(name));
                         });
                     },
                 )
@@ -94,5 +93,3 @@ class PlaylistListState extends State<PlaylistList> {
         );
     }
 }
-
-
