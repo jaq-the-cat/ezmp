@@ -16,6 +16,18 @@ Future<String> _playlistNameDialogBuilder(BuildContext context, String confirmTe
                                 TextFormField(
                                     autofocus: true,
                                     controller: ctrl,
+                                    decoration: InputDecoration(
+                                        labelText: "Playlist Name",
+                                        labelStyle: TextStyle(
+                                            color: Colors.deepOrange,
+                                        ),
+                                        fillColor: Colors.deepOrange,
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                    color: Colors.deepOrange,
+                                            ),
+                                        ),
+                                    ),
                                 ),
                                 Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
