@@ -26,7 +26,7 @@ class PlaylistState extends State<PlaylistPage> {
                 ],
             ),
             body: ListView(
-                children: getSongListWidget(context, widget.name,
+                children: getSongListWidget(context, name: widget.name,
                     onRemove: (String songName) => setState(() => Playlists.removeSong(widget.name, songName))),
             ),
             persistentFooterButtons: [

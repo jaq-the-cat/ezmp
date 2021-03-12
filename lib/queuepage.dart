@@ -13,7 +13,7 @@ class QueuePageState extends State<QueuePage> {
             title: Text("Queue"),
         ),
         body: ListView(
-            children: getSongListWidget(context, globalQueue.songs.toSet(), onChange: () => setState(() {})),
+            children: getSongListWidget(context, songs: globalQueue.songs.toSet(), onChange: () => setState(() {})),
         ),
         persistentFooterButtons: [
             TextButton.icon(
