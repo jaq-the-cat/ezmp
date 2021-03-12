@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'musicio.dart';
 import 'dialogs.dart';
 import 'queue.dart';
 
@@ -7,10 +8,10 @@ enum WhatDo {
     Remove,
 }
 
-List<Widget> getSongListWidget(BuildContext context, Set<String> songs, {
-        void Function(String songName) onRemove,
-        void Function() onChange
-    }) => songs.map(
+List<Widget> getSongListWidget(BuildContext context, String name, {
+    void Function(String songName) onRemove,
+    void Function() onChange
+}) => Playlists.songs(name).map(
     (songName) => Container(
         margin: EdgeInsets.all(10),
         padding: EdgeInsets.only(left: 5),

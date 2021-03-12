@@ -17,13 +17,11 @@ class PlaylistListState extends State<PlaylistList> {
 
     String newPlaylistName = "";
 
-    Map<String, Set<String>> playlists = getPlaylists();
-
-    Widget playlistItem(String name, Set<String> songs, {void Function() onLongPress}) => TextButton(
+    Widget playlistItem(String name, {void Function() onLongPress}) => TextButton(
         onPressed: () {
             Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PlaylistPage(name, songs))
+                MaterialPageRoute(builder: (context) => PlaylistPage(name))
             );
         },
         onLongPress: onLongPress,
@@ -46,18 +44,18 @@ class PlaylistListState extends State<PlaylistList> {
 
     List<Widget> makePlaylistWidgets() {
         List<Widget> list = [];
-        for (String name in playlists.keys)
-            list.add(playlistItem(name, playlists[name], onLongPress: () {
+        for (String name in Playlists.names)
+            list.add(playlistItem(name, onLongPress: () {
                 heldOnPlaylist(
                     context,
                     name,
                     onRename: () => setState(() {
                         renamePlaylist(context, name,
-                            (newName) => setState(() => playlists.renameKey(name, newName)));
+                            (newName) => setState(() => Playlists.rename(name, newName)));
                     }),
                     onDelete: () => setState(() {
                         confirmDelete(context, name,
-                            () => setState(() => playlists.remove(name)),
+                            () => setState(() => Playlists.remove(name)),
                         );
                     })
                 );

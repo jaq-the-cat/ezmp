@@ -1,21 +1,37 @@
-extension RenameKey on Map {
-    void renameKey(String oldKey, String newKey) {
-        var value = this[oldKey];
-        this.remove(oldKey);
-        this[newKey] = value;
+class Playlists {
+
+    static Set<String> get names {
+        return {
+            "Playlist 1",
+            "Playlist 2",
+            "Playlist 3",
+            "Playlist 4",
+        };
     }
-}
 
-Map<String, Set<String>> getPlaylists() {
-    return {
-        "Playlist 1": ["/path/to/song/1", "/path/to/song/2"].toSet(),
-        "Playlist 2": ["/path/to/song/1", "/path/to/song/2", "/path/to/song/3"].toSet(),
-        "Playlist 3": ["/path/to/song/1"].toSet(),
-        "Playlist 4": Set(),
-    };
-}
+    static Set<String> songs(String name) {
+        return {
+            "Playlist 1": ["/path/to/song/1", "/path/to/song/2"].toSet(),
+            "Playlist 2": ["/path/to/song/1", "/path/to/song/2", "/path/to/song/3"].toSet(),
+            "Playlist 3": ["/path/to/song/1"].toSet(),
+            "Playlist 4": Set(),
+        }[name];
+    }
 
-void savePlaylists(Map<String, Set<String>> playlists) {
+    static void addSongs(String name, Set<String> songs) {
+    }
+
+    static void removeSong(String name, String songName) {
+    }
+
+    static void rename(String oldName, String newName) {
+    }
+
+    static void add(String name) {
+    }
+
+    static void remove(String name) {
+    }
 }
 
 Set<String> getSongs() {
