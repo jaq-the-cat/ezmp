@@ -1,32 +1,9 @@
 import 'package:flutter/material.dart';
-import 'musicio.dart';
-import 'playlist.dart';
-import 'dialogs.dart';
-import 'queuepage.dart';
+import 'playlistlist.dart';
 
-final newPlaylistKey = GlobalKey<HomePageState>();
+void main() => runApp(App());
 
-void main() => runApp(MyApp());
-
-Widget newPlaylistForm(TextEditingController nameController, {void Function() onCreate}) => Container(
-    margin: EdgeInsets.symmetric(horizontal: 10),
-    child: Row(
-        children: <Widget>[
-            Expanded(
-                child: TextFormField(
-                    autofocus: true,
-                    controller: nameController,
-                ),
-            ),
-            TextButton(
-                child: Text("Create"),
-                onPressed: onCreate,
-            ),
-        ],
-    ),
-);
-
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return MaterialApp(
@@ -36,113 +13,7 @@ class MyApp extends StatelessWidget {
                 visualDensity: VisualDensity.adaptivePlatformDensity,
                 brightness: Brightness.dark,
             ),
-            home: HomePage(title: 'EZMP', key: newPlaylistKey),
-        );
-    }
-}
-
-class HomePage extends StatefulWidget {
-    HomePage({Key key, this.title}) : super(key: key);
-
-    final String title;
-
-    @override
-    HomePageState createState() => HomePageState();
-}
-
-class HomePageState extends State<HomePage> {
-
-    bool newPlaylistOpen = false;
-    TextEditingController nameController = TextEditingController();
-
-    Map<String, Set<String>> playlists = getPlaylists();
-
-    List<Widget> makePlaylistWidgets() {
-        List<Widget> list = [];
-        for (String name in playlists.keys)
-            list.add(PlaylistItem(name, playlists[name], () {
-                confirmDelete(
-                    name,
-                    () => setState(() => playlists.remove(name)),
-                    context,
-                );
-        }));
-        if (newPlaylistOpen) {
-            list.add(newPlaylistForm(
-                nameController,
-                onCreate: () => setState(() {
-                    if (nameController.text != null && nameController.text != "") {
-                        playlists[nameController.text] = Set();
-                        nameController.clear();
-                    }
-                    newPlaylistOpen ^= true;
-                }),
-            ));
-        }
-        return list;
-    }
-
-    @override
-    Widget build(BuildContext context) {
-        return Scaffold(
-            appBar: AppBar(
-                title: Text(widget.title),
-                actions: [
-                    openQueuePageButton(context),
-                ],
-            ),
-            body: ListView(
-                children: makePlaylistWidgets(),
-            ),
-            persistentFooterButtons: [
-                TextButton.icon(
-                    icon: Icon(Icons.add),
-                    label: Text("New Playlist"),
-                    onPressed: () {
-                        setState(() {
-                            nameController.clear();
-                            newPlaylistOpen ^= true;
-                        });
-                    },
-                )
-            ],
-        );
-    }
-}
-
-class PlaylistItem extends StatelessWidget {
-
-    PlaylistItem(this.name, this.songs, this.onLongPress, {Key key}) : super(key: key);
-
-    final String name;
-    final Set<String> songs;
-    final Function onLongPress;
-
-    @override
-    Widget build(BuildContext context) {
-        return TextButton(
-            onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PlaylistPage(name, songs))
-                );
-            },
-            onLongPress: onLongPress,
-            child: Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                        Text(
-                            name,
-                            style: TextStyle(
-                                fontSize: 20,
-                            ),
-                        ),
-                        Icon(Icons.keyboard_arrow_right),
-                    ],
-                ),
-            ),
+            home: PlaylistList(title: 'EZMP'),
         );
     }
 }
