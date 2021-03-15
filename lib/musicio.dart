@@ -4,13 +4,16 @@ import 'package:flutter_audio_query/flutter_audio_query.dart';
 final FlutterAudioQuery _audioQuery = FlutterAudioQuery();
 
 class Playlists {
-    static Set<String> get names {
-        return {
-            "Playlist 1",
-            "Playlist 2",
-            "Playlist 3",
-            "Playlist 4",
-        };
+    static Future<Set<String>> get names async {
+        final prefs = await SharedPreferences.getInstance();
+        return prefs.getKeys().where((key) {
+            try {
+                prefs.getStringList(key);
+                return true;
+            } catch(exc) {
+                return false;
+            }
+        });
     }
 
     static Future<Set<String>> songs(String name) async {
@@ -22,12 +25,12 @@ class Playlists {
         return _audioQuery.getSongs();
     }
 
-    static Future<void> addSongs(String name, Set<String> songs) async {
+    static Future<void> addSongs(String name, Set<String> songIds) async {
         final prefs = await SharedPreferences.getInstance();
-        prefs.setStringList(name, songs.toList());
+        prefs.setStringList(name, songIds.toList());
     }
 
-    static Future<void> removeSong(String name, String songName) async {
+    static Future<void> removeSong(String name, String songId) async {
         final prefs = await SharedPreferences.getInstance();
         List<String> songs;
         try {
@@ -35,7 +38,7 @@ class Playlists {
         } catch(exc) {
             songs = [];
         }
-        songs.remove(songName);
+        songs.remove(songId);
         prefs.setStringList(name, songs);
     }
 
