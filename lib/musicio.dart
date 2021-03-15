@@ -16,9 +16,10 @@ class Playlists {
         });
     }
 
-    static Future<Set<String>> songs(String name) async {
+    static Future<List<SongInfo>> songs(String name) async {
         final prefs = await SharedPreferences.getInstance();
-        return prefs.getStringList(name).toSet();
+        List<String> songIds = prefs.getStringList(name);
+        return _audioQuery.getSongsById(ids: songIds);
     }
 
     static Future<List<SongInfo>> getSongs() async {
