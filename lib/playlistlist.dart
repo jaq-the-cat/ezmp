@@ -40,9 +40,9 @@ class PlaylistListState extends State<PlaylistList> {
         ),
     );
 
-    List<Widget> makePlaylistWidgets() {
+    List<Widget> makePlaylistWidgets(List<String> playlistNames) {
         List<Widget> list = [];
-        for (String name in Playlists.names)
+        for (String name in playlistNames)
             list.add(playlistItem(name, onLongPress: () {
                 heldOnPlaylist(
                     context,
@@ -75,8 +75,14 @@ class PlaylistListState extends State<PlaylistList> {
                     openQueuePageButton(context),
                 ],
             ),
-            body: ListView(
-                children: makePlaylistWidgets(),
+            body: FutureBuilder(
+                future: Playlists.names,
+                builder: (context, snapshot) {
+                    if (!snapshot.hasData) return Container();
+                    return ListView(
+                        children: makePlaylistWidgets(snapshot.data),
+                    );
+                },
             ),
             persistentFooterButtons: [
                 TextButton.icon(

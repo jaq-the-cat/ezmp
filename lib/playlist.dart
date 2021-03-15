@@ -26,10 +26,8 @@ class PlaylistState extends State<PlaylistPage> {
                     openQueuePageButton(context),
                 ],
             ),
-            body: ListView(
-                children: getSongListWidget(context, name: widget.name,
-                    onRemove: (String songName) => setState(() => Playlists.removeSong(widget.name, songName))),
-            ),
+            body: getSongListWidget(context, name: widget.name,
+                onRemove: (SongInfo song) => setState(() => Playlists.removeSong(widget.name, song.id))),
             persistentFooterButtons: [
                 TextButton.icon(
                     icon: Icon(Icons.music_note),
@@ -41,15 +39,17 @@ class PlaylistState extends State<PlaylistPage> {
                 TextButton.icon(
                     icon: Icon(Icons.shuffle),
                     label: Text("Shuffle"),
-                    onPressed: () {
+                    onPressed: () async {
                         globalQueue.shuffle = true;
-                        globalQueue.play(Playlists.songs(widget.name));
+                        globalQueue.play(await Playlists.songs(widget.name));
                     }
                 ),
                 TextButton.icon(
                     icon: Icon(Icons.play_arrow),
                     label: Text("Play"),
-                    onPressed: () => globalQueue.play(Playlists.songs(widget.name)),
+                    onPressed: () async {
+                        globalQueue.play(await Playlists.songs(widget.name));
+                    },
                 ),
             ],
         );

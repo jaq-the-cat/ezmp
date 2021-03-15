@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'songlistwidget.dart';
 import 'queue.dart';
-import 'dart:math' as math;
 
 class QueuePage extends StatefulWidget {
     @override
@@ -13,9 +12,7 @@ class QueuePageState extends State<QueuePage> {
         appBar: AppBar(
             title: Text("Queue"),
         ),
-        body: ListView(
-            children: getSongListWidget(context, songs: globalQueue.songs.toSet(), onChange: () => setState(() {})),
-        ),
+        body: getSongListWidget(context, songs: Future.value(globalQueue.songs), onChange: () => setState(() {})),
         bottomNavigationBar: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
